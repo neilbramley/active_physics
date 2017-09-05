@@ -1,0 +1,152 @@
+[2016-01-25 16:44:18] ERROR (AbstractCmd.java: 64) - The Mechanical Turk command line tool is not configured correctly: access_key is missing!
+[2016-01-25 16:44:18] ERROR (AbstractCmd.java: 65) - Please open the configuration file (mturk.properties) and correct this setting before proceeding.
+[2016-01-25 16:52:58] ERROR (AbstractCmd.java: 150) - An error occurred: This request must be made over a secure channel. You must use 'https' rather than 'http'.
+com.amazonaws.mturk.service.exception.InternalServiceException: This request must be made over a secure channel. You must use 'https' rather than 'http'.
+	at com.amazonaws.mturk.service.axis.AWSService.executeRequestMessage(AWSService.java:243)
+	at com.amazonaws.mturk.filter.FinalFilter.execute(FinalFilter.java:38)
+	at com.amazonaws.mturk.filter.Filter.passMessage(Filter.java:56)
+	at com.amazonaws.mturk.filter.ErrorProcessingFilter.execute(ErrorProcessingFilter.java:46)
+	at com.amazonaws.mturk.filter.Filter.passMessage(Filter.java:56)
+	at com.amazonaws.mturk.filter.RetryFilter.execute(RetryFilter.java:115)
+	at com.amazonaws.mturk.filter.Filter.passMessage(Filter.java:56)
+	at com.amazonaws.mturk.util.CLTExceptionFilter.sendMessage(CLTExceptionFilter.java:77)
+	at com.amazonaws.mturk.util.CLTExceptionFilter.execute(CLTExceptionFilter.java:62)
+	at com.amazonaws.mturk.service.axis.FilteredAWSService.executeRequests(FilteredAWSService.java:172)
+	at com.amazonaws.mturk.service.axis.FilteredAWSService.executeRequest(FilteredAWSService.java:152)
+	at com.amazonaws.mturk.service.axis.FilteredAWSService.executeRequest(FilteredAWSService.java:116)
+	at com.amazonaws.mturk.service.axis.RequesterServiceRaw.grantBonus(RequesterServiceRaw.java:906)
+	at com.amazonaws.mturk.cmd.GrantBonus.grantBonus(GrantBonus.java:93)
+	at com.amazonaws.mturk.cmd.GrantBonus.runCommand(GrantBonus.java:86)
+	at com.amazonaws.mturk.cmd.AbstractCmd.run(AbstractCmd.java:148)
+	at com.amazonaws.mturk.cmd.GrantBonus.main(GrantBonus.java:30)
+Caused by: This request must be made over a secure channel. You must use 'https' rather than 'http'.
+	at org.apache.axis.message.SOAPFaultBuilder.createFault(SOAPFaultBuilder.java:222)
+	at org.apache.axis.message.SOAPFaultBuilder.endElement(SOAPFaultBuilder.java:129)
+	at org.apache.axis.encoding.DeserializationContext.endElement(DeserializationContext.java:1087)
+	at org.apache.xerces.parsers.AbstractSAXParser.endElement(Unknown Source)
+	at org.apache.xerces.impl.XMLNSDocumentScannerImpl.scanEndElement(Unknown Source)
+	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown Source)
+	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
+	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
+	at org.apache.xerces.jaxp.SAXParserImpl$JAXPSAXParser.parse(Unknown Source)
+	at org.apache.xerces.jaxp.SAXParserImpl.parse(Unknown Source)
+	at org.apache.axis.encoding.DeserializationContext.parse(DeserializationContext.java:227)
+	at org.apache.axis.SOAPPart.getAsSOAPEnvelope(SOAPPart.java:696)
+	at org.apache.axis.Message.getSOAPEnvelope(Message.java:435)
+	at org.apache.axis.handlers.soap.MustUnderstandChecker.invoke(MustUnderstandChecker.java:62)
+	at org.apache.axis.client.AxisClient.invoke(AxisClient.java:206)
+	at org.apache.axis.client.Call.invokeEngine(Call.java:2784)
+	at org.apache.axis.client.Call.invoke(Call.java:2767)
+	at org.apache.axis.client.Call.invoke(Call.java:2443)
+	at org.apache.axis.client.Call.invoke(Call.java:2366)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at com.amazonaws.mturk.requester.AWSMechanicalTurkRequesterBindingStub.grantBonus(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.amazonaws.mturk.service.axis.AWSService.executeRequestMessage(AWSService.java:220)
+	... 16 more
+[2016-01-25 16:55:27] ERROR (AbstractCmd.java: 150) - An error occurred: Error #1 for RequestId: 671e55c9-36f8-4a80-abab-767b20982021 - AWS.NotAuthorized: The identity contained in the request is not authorized to use this AWSAccessKeyId (1453758926930)
+com.amazonaws.mturk.service.exception.AccessKeyException: Error #1 for RequestId: 671e55c9-36f8-4a80-abab-767b20982021 - AWS.NotAuthorized: The identity contained in the request is not authorized to use this AWSAccessKeyId (1453758926930)
+	at com.amazonaws.mturk.filter.ErrorProcessingFilter.processErrors(ErrorProcessingFilter.java:91)
+	at com.amazonaws.mturk.filter.ErrorProcessingFilter.execute(ErrorProcessingFilter.java:48)
+	at com.amazonaws.mturk.filter.Filter.passMessage(Filter.java:56)
+	at com.amazonaws.mturk.filter.RetryFilter.execute(RetryFilter.java:115)
+	at com.amazonaws.mturk.filter.Filter.passMessage(Filter.java:56)
+	at com.amazonaws.mturk.util.CLTExceptionFilter.sendMessage(CLTExceptionFilter.java:77)
+	at com.amazonaws.mturk.util.CLTExceptionFilter.execute(CLTExceptionFilter.java:62)
+	at com.amazonaws.mturk.service.axis.FilteredAWSService.executeRequests(FilteredAWSService.java:172)
+	at com.amazonaws.mturk.service.axis.FilteredAWSService.executeRequest(FilteredAWSService.java:152)
+	at com.amazonaws.mturk.service.axis.FilteredAWSService.executeRequest(FilteredAWSService.java:116)
+	at com.amazonaws.mturk.service.axis.RequesterServiceRaw.grantBonus(RequesterServiceRaw.java:906)
+	at com.amazonaws.mturk.cmd.GrantBonus.grantBonus(GrantBonus.java:93)
+	at com.amazonaws.mturk.cmd.GrantBonus.runCommand(GrantBonus.java:86)
+	at com.amazonaws.mturk.cmd.AbstractCmd.run(AbstractCmd.java:148)
+	at com.amazonaws.mturk.cmd.GrantBonus.main(GrantBonus.java:30)
+[2016-01-25 17:08:31] INFO  (GrantBonus.java: 95) - Granted bonus to A2MWAXV1YRK5GH
+[2016-01-25 17:14:41] INFO  (GrantBonus.java: 95) - Granted bonus to AG61AWXAA84GD
+[2016-01-25 17:14:43] INFO  (GrantBonus.java: 95) - Granted bonus to A23YOJ16ZTWQ30
+[2016-01-25 17:14:44] INFO  (GrantBonus.java: 95) - Granted bonus to A1P0NNR8HOQ95R
+[2016-01-25 17:14:46] INFO  (GrantBonus.java: 95) - Granted bonus to AUAN582MLI96N
+[2016-01-25 17:14:48] INFO  (GrantBonus.java: 95) - Granted bonus to A3QSFE6GKO157S
+[2016-01-25 17:14:49] INFO  (GrantBonus.java: 95) - Granted bonus to A2RYN1S6OSO9KX
+[2016-01-25 17:14:51] INFO  (GrantBonus.java: 95) - Granted bonus to A110KENBXU7SUJ
+[2016-01-25 17:14:53] INFO  (GrantBonus.java: 95) - Granted bonus to A3VMKLJTSGYKHN
+[2016-01-25 17:14:54] INFO  (GrantBonus.java: 95) - Granted bonus to A2JI5RNPPXE8QE
+[2016-01-25 17:14:56] INFO  (GrantBonus.java: 95) - Granted bonus to A33QUS4NRVVMTN
+[2016-01-25 17:14:58] INFO  (GrantBonus.java: 95) - Granted bonus to A2WX9BYW5TI8OA
+[2016-01-25 17:15:00] INFO  (GrantBonus.java: 95) - Granted bonus to A25MM8IKSW3G19
+[2016-01-25 17:15:01] INFO  (GrantBonus.java: 95) - Granted bonus to A1T9IKE8GV4LR4
+[2016-01-25 17:15:03] INFO  (GrantBonus.java: 95) - Granted bonus to A2WQTSU6SSBUWC
+[2016-01-25 17:15:05] INFO  (GrantBonus.java: 95) - Granted bonus to A2N0FUQBDQRBN5
+[2016-01-25 17:15:07] INFO  (GrantBonus.java: 95) - Granted bonus to A2Z96TK65BB7LC
+[2016-01-25 17:15:09] INFO  (GrantBonus.java: 95) - Granted bonus to A36662QQDZ9J3R
+[2016-01-25 17:15:10] INFO  (GrantBonus.java: 95) - Granted bonus to A1LJ4WAEDGELVL
+[2016-01-25 17:15:12] INFO  (GrantBonus.java: 95) - Granted bonus to A3W6T1WDYXMR3
+[2016-01-25 17:15:14] INFO  (GrantBonus.java: 95) - Granted bonus to AVC1PLLFS210S
+[2016-01-25 17:15:16] INFO  (GrantBonus.java: 95) - Granted bonus to A195MOXRMNHRVT
+[2016-01-25 17:15:18] INFO  (GrantBonus.java: 95) - Granted bonus to A28HYRF3QXFAXL
+[2016-01-25 17:15:20] INFO  (GrantBonus.java: 95) - Granted bonus to A3GDTSFHVBUJHD
+[2016-01-25 17:15:21] INFO  (GrantBonus.java: 95) - Granted bonus to A4J4GGMKJ68L0
+[2016-01-25 17:15:23] INFO  (GrantBonus.java: 95) - Granted bonus to A3B7TNVOISSZ2O
+[2016-01-25 17:15:25] INFO  (GrantBonus.java: 95) - Granted bonus to A29HUSCMP9TKWW
+[2016-01-25 17:15:26] INFO  (GrantBonus.java: 95) - Granted bonus to A1JNC3HWWHJD2J
+[2016-01-25 17:15:28] INFO  (GrantBonus.java: 95) - Granted bonus to A11C9D55C41PB2
+[2016-01-25 17:15:30] INFO  (GrantBonus.java: 95) - Granted bonus to A376BI2RNUIFRH
+[2016-01-25 17:15:32] INFO  (GrantBonus.java: 95) - Granted bonus to A306GWTM2KVPJ0
+[2016-01-25 17:15:33] INFO  (GrantBonus.java: 95) - Granted bonus to A3ICAL8EDT8WHG
+[2016-01-25 17:15:35] INFO  (GrantBonus.java: 95) - Granted bonus to A212QVOGP76UH2
+[2016-01-25 17:15:37] INFO  (GrantBonus.java: 95) - Granted bonus to A194HYD53ONJOY
+[2016-01-25 17:15:39] INFO  (GrantBonus.java: 95) - Granted bonus to A2O4D0WJS54KCO
+[2016-01-25 17:15:40] INFO  (GrantBonus.java: 95) - Granted bonus to A27W025UEXS1G0
+[2016-01-25 17:15:42] INFO  (GrantBonus.java: 95) - Granted bonus to A359ETX78LN74M
+[2016-01-25 17:15:44] INFO  (GrantBonus.java: 95) - Granted bonus to A1Z7J3XE1R8TYT
+[2016-01-25 17:15:46] INFO  (GrantBonus.java: 95) - Granted bonus to A3EJ44J2ZNRMDA
+[2016-01-25 17:15:47] INFO  (GrantBonus.java: 95) - Granted bonus to A2K9HSMVUUZJSI
+[2016-01-25 17:15:49] INFO  (GrantBonus.java: 95) - Granted bonus to A2EI075XZT9Y2S
+[2016-01-25 17:15:51] INFO  (GrantBonus.java: 95) - Granted bonus to A15PM8KAJ40XV7
+[2016-01-25 17:15:52] INFO  (GrantBonus.java: 95) - Granted bonus to AXF0OX50YZQC6
+[2016-01-25 17:15:54] INFO  (GrantBonus.java: 95) - Granted bonus to A1E5BY1MHT9C1E
+[2016-01-25 17:15:56] INFO  (GrantBonus.java: 95) - Granted bonus to ANV4TUKMWLA8E
+[2016-01-25 17:15:57] INFO  (GrantBonus.java: 95) - Granted bonus to A207149DHAS89K
+[2016-01-25 17:15:59] INFO  (GrantBonus.java: 95) - Granted bonus to A4E1UYPDHE8D8
+[2016-01-25 17:16:01] INFO  (GrantBonus.java: 95) - Granted bonus to ASTDBTVY3WP1K
+[2016-01-25 17:16:02] INFO  (GrantBonus.java: 95) - Granted bonus to AHB3QFZSFN9DL
+[2016-01-25 17:16:04] INFO  (GrantBonus.java: 95) - Granted bonus to A3D2U4QF7821ZW
+[2016-01-25 17:16:06] ERROR (AbstractCmd.java: 150) - An error occurred: Error #1 for RequestId: 738223a0-8faf-4b43-89ed-a9b39a378f14 - AWS.MechanicalTurk.AssignmentDoesNotExist: Assignment 3YT88D1N08YSUJ1FTXMRKKNSOMOK3G does not exist. (1453760166210)
+com.amazonaws.mturk.service.exception.ObjectDoesNotExistException: Error #1 for RequestId: 738223a0-8faf-4b43-89ed-a9b39a378f14 - AWS.MechanicalTurk.AssignmentDoesNotExist: Assignment 3YT88D1N08YSUJ1FTXMRKKNSOMOK3G does not exist. (1453760166210)
+	at com.amazonaws.mturk.filter.ErrorProcessingFilter.processErrors(ErrorProcessingFilter.java:105)
+	at com.amazonaws.mturk.filter.ErrorProcessingFilter.execute(ErrorProcessingFilter.java:48)
+	at com.amazonaws.mturk.filter.Filter.passMessage(Filter.java:56)
+	at com.amazonaws.mturk.filter.RetryFilter.execute(RetryFilter.java:115)
+	at com.amazonaws.mturk.filter.Filter.passMessage(Filter.java:56)
+	at com.amazonaws.mturk.util.CLTExceptionFilter.sendMessage(CLTExceptionFilter.java:77)
+	at com.amazonaws.mturk.util.CLTExceptionFilter.execute(CLTExceptionFilter.java:62)
+	at com.amazonaws.mturk.service.axis.FilteredAWSService.executeRequests(FilteredAWSService.java:172)
+	at com.amazonaws.mturk.service.axis.FilteredAWSService.executeRequest(FilteredAWSService.java:152)
+	at com.amazonaws.mturk.service.axis.FilteredAWSService.executeRequest(FilteredAWSService.java:116)
+	at com.amazonaws.mturk.service.axis.RequesterServiceRaw.grantBonus(RequesterServiceRaw.java:906)
+	at com.amazonaws.mturk.cmd.GrantBonus.grantBonus(GrantBonus.java:93)
+	at com.amazonaws.mturk.cmd.GrantBonus.runCommand(GrantBonus.java:86)
+	at com.amazonaws.mturk.cmd.AbstractCmd.run(AbstractCmd.java:148)
+	at com.amazonaws.mturk.cmd.GrantBonus.main(GrantBonus.java:30)
+[2016-01-25 17:16:07] INFO  (GrantBonus.java: 95) - Granted bonus to A3LC1KRWMHUH9I
+[2016-01-25 17:16:09] INFO  (GrantBonus.java: 95) - Granted bonus to A2JGSSRI6SJ8P6
+[2016-01-25 17:16:11] INFO  (GrantBonus.java: 95) - Granted bonus to A2TKF8DPMLXRUO
+[2016-01-25 17:16:13] INFO  (GrantBonus.java: 95) - Granted bonus to A85ATJSDTIARY
+[2016-01-25 17:16:14] INFO  (GrantBonus.java: 95) - Granted bonus to A38HFMRXB5Q13M
+[2016-01-25 17:16:16] INFO  (GrantBonus.java: 95) - Granted bonus to A19L9MK673JAAG
+[2016-01-25 17:16:18] INFO  (GrantBonus.java: 95) - Granted bonus to A9HQ3E0F2AGVO
+[2016-01-25 17:16:19] INFO  (GrantBonus.java: 95) - Granted bonus to A2FFNO6G4FEE2N
+[2016-01-25 17:16:21] INFO  (GrantBonus.java: 95) - Granted bonus to A3M01W8KKZF99X
+[2016-01-25 17:16:23] INFO  (GrantBonus.java: 95) - Granted bonus to A3527QDVIOHI8E
+[2016-01-25 17:16:25] INFO  (GrantBonus.java: 95) - Granted bonus to AQL960O0LTRI8
+[2016-01-25 17:16:26] INFO  (GrantBonus.java: 95) - Granted bonus to AV22FQTJNBUZT
+[2016-01-25 17:16:28] INFO  (GrantBonus.java: 95) - Granted bonus to A2916GCJERYKC2
+[2016-01-25 17:16:30] INFO  (GrantBonus.java: 95) - Granted bonus to A2UTDZAZV1DF0N
+[2016-01-25 17:16:32] INFO  (GrantBonus.java: 95) - Granted bonus to ADP7UNGJZKRSK
+[2016-01-26 14:55:58] INFO  (GrantBonus.java: 95) - Granted bonus to A2OS0VCSQLU3HE

@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="static/lib/Box2dWeb-2.1.a.3.js"></script>
+  <script src="static/lib/ivank.js"></script>
+  <script src="static/lib/jquery.min.js"></script>
+  
+  <script>
+
+    ///////////////////////
+    //PHYSICS WORLD: ALL THREE LEARNING CONDITIONS
+    ///////////////////////
+
+    var world;
+    var bodies = []; // instances of b2Body (from Box2D)
+    var actors = []; // instances of Bitmap (from IvanK)
+    var preGlobalPos = null; //What is this for??
+    var idControlledObject = undefined; //The id of the object that moves with the mouse position in the list of box2d 'bodies' and ivank 'actors'
+    var maxSpeed = 30; //A cap on the speed of the objects so things don't get out of control.  (10 means 10 'meters' per second??)
+    // var stopTime = 60//1800;//How many frames should the clip last?  There are 60 frames per second.  30000; //When should the clip end in ms?
+    // var stopTime = 180;//0;
+    var stopTime = 1800;
+    //var stopTime = 2700;
+    var stopCrit = .15//How slow do the balls have to get before a restart in the passive condition
+    var stage; //the stage
+    var mouse_initially_entered_frame = false;
+    var xPos = 0;
+    var yPos = 0;
+    var howLongPauseOnRefresh = 500;
+    var data = {
+      timeline: [],
+      events: [],
+      setup: [],
+      constants: []
+    };
+    var zoomConstant = true; //Keeping track of whether the user changes the zoom level
+
+    //Declaring a bunch of needed box2d variables
+    var b2Vec2 = Box2D.Common.Math.b2Vec2,
+      b2BodyDef = Box2D.Dynamics.b2BodyDef,
+      b2Body = Box2D.Dynamics.b2Body,
+      b2FixtureDef = Box2D.Dynamics.b2FixtureDef,
+      b2World = Box2D.Dynamics.b2World,
+      b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
+    b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
+    b2GravityController = Box2D.Dynamics.Controllers.b2GravityController;
+    b2TensorDampingController = Box2D.Dynamics.Controllers.b2TensorDampingController;
+    b2ContactListener = Box2D.Dynamics.b2ContactListener;
+
+    //var initial_pixel_ratio = window.devicePixelRatio;
+    //var ratio = 100  * initial_pixel_ratio;//1 meter = 100 pixels -  - NB this is defined in onEF() but not necessary to change it
+
+    /////////////////////////
+    //START FUNCTION
+    /////////////////////////
+    ///
+    function Start() {
+
+      initial_pixel_ratio = window.devicePixelRatio;
+      ratio = 100  * initial_pixel_ratio;//1 meter = 100 pixels -  - NB this is defined in onEF() but not necessary to change it
+
+      trial = parent.STATE.index;
+
+      if (stage == undefined) {
+        stage = new Stage("c");
+      } 
+    
+        
+      fullX = stage.stageWidth / ratio;
+      fullY = stage.stageHeight / ratio;
+
+      xPos = ratio * fullX / 2;
+      yPos = ratio * fullY / 2;
+      stepSize = 1 / 60; //120;
+
+      ///////////////////////////////////////////////
+      //Things that are only added on the first trial
+      ///////////////////////////////////////////////
+      if (trial==0)
+      {
+        var bd = new BitmapData("static/images/border.png");
+        var bm = new Bitmap(bd);
+        bm.x = 0;
+        bm.y = 0;
+        curtain = new Sprite();
+        curtain.addChild(bm);
+        curtain.scaleX = fullX * window.devicePixelRatio;
+        curtain.scaleY = fullY * window.devicePixelRatio;
+      }
+
+      ////////////////////////////////
+      //Read in specifiable properties
+      ////////////////////////////////
+      
+      learn_cond = parent.cond[0];
+      var gravity_east = parent.cond[1];
+      var gravity_south = parent.cond[1];
+      var tmp = parent.cond[2];
+      var y_c_mass = parent.cond[3];
+      var y_c_elasticity = parent.cond[4];
+      var r_c_mass = parent.cond[5];
+      var r_c_elasticity = parent.cond[6];
+      var local_forces = [parent.cond[7], parent.cond[8], parent.cond[9]];
+      patch = parent.cond[10];
+      patch_damping = parent.cond[11];
+      var wall_setup = parent.cond[12];
+
+      /////////////////////////////
+      //Set fixed/randomised properties
+      /////////////////////////////
+
+      fist_mass = 10;
+      fist_elasticity = .5; //Or zero?
+      fist_friction = 0;
+      fistWidth = Math.min(fullX/18, fullY/18);
+      CO_damping = 10; //Controlled object damping
+      damping = .1;
+      var wall_elasticity = .9; //Sets elasticity
+      var wall_friction = 0.1; //Sets friction of the walls  (When does this affect things since the objects always bounce rather than slide??)
+      var wall_mass = 0;
+      var wall_damping = 0;
+      patch_width = Math.random() * 2;
+      patch_height = Math.random() * 2; //Make it a random shape between 0 and 1 meters in each dimension
+      var patch_x = (Math.random() * 3) + .5; //Random location for high friction patch
+      var patch_y = (Math.random() * 2) + .5; //Random location for high friction patch
+      //var y_c_elasticity = .96; //Works, support 0-1 (near zero is like a hacky-sack, near 1 is like a bouncy ball)
+      var y_c_friction = .1;
+      var r_c_friction = .1;
+
+      ///////////////////////////////////
+      //Decompose the global force vector
+      ///////////////////////////////////
+      
+      //If the condition is an odd number then we are on a diagonal
+      if (tmp / 2 != Math.round(tmp / 2)) {
+        gravity_east = Math.sqrt(gravity_east);
+        gravity_south = Math.sqrt(gravity_south);
+      }
+
+      //If it is going east then east-west needs to be negative
+      if (tmp > 3) {
+        gravity_east = -gravity_east
+      };
+      //If it is going north then north-south needs to be negative
+      if (tmp < 2 | tmp > 5) {
+        gravity_south = -gravity_south
+      };
+      //If it is not diagonal then zero the appropriate direction
+      if (tmp == 0 | tmp == 4) {
+        gravity_east = 0
+      };
+      if (tmp == 2 | tmp == 6) {
+        gravity_south = 0
+      };
+
+
+
+        
+
+      ////////////////////////////////////
+      //Things that are reset on each trial
+      /////////////////////////////////////
+      
+      world = new b2World(new b2Vec2(gravity_east, gravity_south));
+      
+      ///////////////////////////////
+      //High friction patch
+      ///////////////////////////////
+
+      // var tensorDampingController = new b2TensorDampingController();
+      // tensorDampingController.SetAxisAligned(patch_damping, patch_damping);
+      // world.AddController(tensorDampingController);
+
+      // // add high-friction surface sensor //patch_dampingsurfaceSensor = 
+      // if (patch == 1) {
+      //   var surfaceSensor = createBox(patch_width, patch_height, patch_x, patch_y, b2Body.b2_staticBody, 0, 0, 0, 0, {
+      //     name: "patch",
+      //     bodyType: "static", W: patch_width,
+      //     H: patch_height
+      //   }, true, stage, "static/images/blue_square.png");
+      //   surfaceSensor.GetFixtureList().m_isSensor = true;
+      //   surfaceSensor.SetUserData({
+      //     name: "S1",
+      //     controller: tensorDampingController
+      //   });
+      // } else {
+      //   //Otherwise create it outside the frame
+      //   var surfaceSensor = createBox(0, 0, 0, 0, b2Body.b2_staticBody, 0, 0, 0, 0, {
+      //     name: "patch",
+      //     bodyType: "static", W: 0,
+      //     H: 0
+      //   }, true, stage, "static/images/blue_square.png");
+      // }
+      // //console.log('patch stuff', surfaceSensor, 'surfaceSensor.userData',surfaceSensor.userData)
+
+
+
+      /////////////////////////////////////////////
+      //Create the walls, set them as static bodies
+      /////////////////////////////////////////////
+      
+      borderWidth = Math.min(fullY / 20, fullX / 20);
+
+      //Parameters: (w,      h,          x,         y,        type, density, damping, friction, restitution, userData, isRendered, stage, img)
+      createBox(fullX / 2, borderWidth, fullX / 2, 0, b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+        name: "top_wall",
+        bodyType: "static",
+        W: fullX / 2,
+        H: borderWidth
+      }, true, stage, "static/images/border.png");
+      createBox(fullX / 2, borderWidth, fullX / 2, fullY, b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+        name: "bottom_wall",
+        bodyType: "static",
+        W: fullX / 2,
+        H: borderWidth
+      }, true, stage, "static/images/border.png");
+      createBox(borderWidth, fullY / 2, 0, fullY / 2, b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+        name: "left_wall",
+        bodyType: "static",
+        W: borderWidth,
+        H: fullY / 2
+      }, true, stage, "static/images/border.png");
+      createBox(borderWidth, fullY / 2, fullX, fullY / 2, b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+        name: "right_wall",
+        bodyType: "static", 
+        W: borderWidth,
+        H: fullY / 2
+      }, true, stage, "static/images/border.png");
+
+      
+
+      //Optionally add partition walls
+      if (wall_setup > 0) {
+        //Vertical walls
+        createBox(fullX / 6, borderWidth / 2, fullX / 6, fullY / 2,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_vert_top",
+            bodyType: "static", 
+            W: (fullX / 6),
+            H: (borderWidth / 2)
+          }, true, stage, "static/images/border.png");
+
+        createBox(fullX / 6, borderWidth / 2, 5 * fullX / 6, fullY / 2,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_vert_bottom",
+            bodyType: "static", 
+            W: (fullX / 6),
+            H: (borderWidth / 2)
+          }, true, stage, "static/images/border.png");
+
+        //Cusps 
+        createBox(borderWidth / 2, borderWidth, fullX / 3, fullY / 2,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_vert_top_cusp",
+            bodyType: "static", 
+            W: (borderWidth / 2),
+            H: borderWidth
+          }, true, stage, "static/images/border.png");
+
+        createBox(borderWidth / 2, borderWidth, 2 * fullX / 3, fullY / 2,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_vert_bottom_cusp",
+            bodyType: "static", 
+            W: (borderWidth / 2),
+            H: borderWidth
+          }, true, stage, "static/images/border.png");
+
+      } else {
+
+        createBox(0, 0, 0, 0,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_vert_top",
+            bodyType: "static", 
+            W: 0,
+            H: 0
+          }, true, stage, "static/images/border.png");
+
+        createBox(0, 0, 0, 0,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_vert_bottom",
+            bodyType: "static", 
+            W: 0,
+            H: 0
+          }, true, stage, "static/images/border.png");
+
+        //Cusps
+        createBox(0, 0, 0, 0,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_vert_top_cusp",
+            bodyType: "static", 
+            W: 0,
+            H: 0
+          }, true, stage, "static/images/border.png");
+
+        createBox(0, 0, 0, 0,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_vert_bottom_cusp",
+            bodyType: "static", 
+            W: 0,
+            H: 0
+          }, true, stage, "static/images/border.png");
+
+      }
+
+      if (wall_setup > 1) {
+        //Horizontal walls
+        createBox(borderWidth / 2, fullY / 6, fullX / 2, fullY / 6,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_horiz_left",
+            bodyType: "static", 
+            W: (borderWidth / 2),
+            H: (fullY / 6)
+          }, true, stage, "static/images/border.png");
+
+        createBox(borderWidth / 2, fullY / 6, fullX / 2, 5 * fullY / 6,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_horiz_right",
+            bodyType: "static", 
+            W: (borderWidth / 2),
+            H: (fullY / 6)
+          }, true, stage, "static/images/border.png");
+
+        //Cusps
+        createBox(borderWidth, borderWidth / 2, fullX / 2, fullY / 3,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_horiz_left_cusp",
+            bodyType: "static", 
+            W: borderWidth,
+            H: (borderWidth / 2)
+          }, true, stage, "static/images/border.png");
+
+        createBox(borderWidth, borderWidth / 2, fullX / 2, 2 * fullY / 3,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_horiz_right_cusp",
+            bodyType: "static", 
+            W: borderWidth,
+            H: (borderWidth / 2)
+          }, true, stage, "static/images/border.png");
+      } else {
+        //Horizontal walls
+        createBox(0, 0, 0, 0,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_horiz_left",
+            bodyType: "static", 
+            W: 0,
+            H: 0
+          }, true, stage, "static/images/border.png");
+
+        createBox(0, 0, 0, 0,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_horiz_right",
+            bodyType: "static", 
+            W: 0,
+            H: 0
+          }, true, stage, "static/images/border.png");
+
+        //Cusps
+        createBox(0, 0, 0, 0,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_horiz_left_cusp",
+            bodyType: "static", 
+            W: 0,
+            H: 0
+          }, true, stage, "static/images/border.png");
+
+        createBox(0, 0, 0, 0,
+          b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+            name: "wall_horiz_right_cusp",
+            bodyType: "static", 
+            W: 0,
+            H: 0
+          }, true, stage, "static/images/border.png");
+      }
+
+
+
+
+
+
+      ///////////////////////////
+      //Create the mobile objects
+      ///////////////////////////
+      ///
+      ballWidth = Math.min(fullX / 16, fullY / 16);
+
+      //Starting locations
+      sc_locs = RandomLocations(4);
+      //Starting velocities
+      var sv_yc1 = new b2Vec2((Math.random() * 20 - 10), (Math.random() * 20 - 10));
+      var sv_yc2 = new b2Vec2((Math.random() * 20 - 10), (Math.random() * 20 - 10));
+      var sv_rc1 = new b2Vec2((Math.random() * 20 - 10), (Math.random() * 20 - 10));
+      var sv_rc2 = new b2Vec2((Math.random() * 20 - 10), (Math.random() * 20 - 10));
+
+
+
+      //(r, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img)
+      yellow_circle1 = createBall(ballWidth, sc_locs[0][0], sc_locs[0][1], sv_yc1, b2Body.b2_dynamicBody, y_c_mass, damping, y_c_friction, y_c_elasticity, {
+        name: "yellow_circle1",
+        bodyType: "dynamic", 
+        W: ballWidth,
+        H: ballWidth
+      }, true, stage, "static/images/yellow_circle.png");
+
+      yellow_circle2 = createBall(ballWidth, sc_locs[1][0], sc_locs[1][1], sv_yc2, b2Body.b2_dynamicBody, y_c_mass, damping, y_c_friction, y_c_elasticity, {
+        name: "yellow_circle2",
+        bodyType: "dynamic", 
+        W: ballWidth,
+        H: ballWidth
+      }, true, stage, "static/images/yellow_circle.png");
+
+
+      //(r, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img)
+      red_circle1 = createBall(ballWidth, sc_locs[2][0], sc_locs[2][1], sv_rc1, b2Body.b2_dynamicBody, r_c_mass, damping, r_c_friction, r_c_elasticity, {
+        name: "red_circle1",
+        bodyType: "dynamic", 
+        W: ballWidth,
+        H: ballWidth
+      }, true, stage, "static/images/red_circle.png");
+
+      red_circle2 = createBall(ballWidth, sc_locs[3][0], sc_locs[3][1], sv_rc2, b2Body.b2_dynamicBody, r_c_mass, damping, r_c_friction, r_c_elasticity, {
+        name: "red_circle2",
+        bodyType: "dynamic", 
+        W: ballWidth,
+        H: ballWidth
+      }, true, stage, "static/images/red_circle.png");
+
+
+      if (learn_cond==1)
+      {
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //CHILD LEARNING CONDITION
+        //The user's 'hand', since the user controls its position and it does not get knocked back by collisions
+        //(i.e. infinite mass) it only needs elasticity
+        //(r, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img)
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        var sv_fist = new b2Vec2(0,0);
+
+        userFist = createBall(fistWidth, fullX/2, fullY/2, sv_fist, b2Body.b2_dynamicBody, fist_mass, CO_damping, fist_friction, fist_elasticity, {name:"fist", bodyType: "dynamic", W:fistWidth, H:fistWidth}, true, stage, "static/images/punch.png");
+        
+        idControlledObject = (actors.length-1);//WHAT NUMBER?
+        console.log(idControlledObject);
+      } else  {
+        //if (learn_cond==2)
+        //If it's not condition 1, draw the fist anyway but make it size zero and inert
+        userFist = createBall(0, 0, 0, 0, b2Body.b2_staticBody, fist_mass, CO_damping, fist_friction, fist_elasticity, {name:"fist", bodyType: "dynamic", W:fistWidth, H:fistWidth}, true, stage, "static/images/punch.png");
+
+      	idControlledObject = undefined;
+      }
+
+
+      world.SetContactListener(listener);
+
+      ///////////////////////
+      //Add all the forces
+      ///////////////////////
+        
+
+      var gravityController1 = new b2GravityController();
+      var gravityController2 = new b2GravityController();
+      var gravityController3 = new b2GravityController();
+      var gravityController4 = new b2GravityController();
+      var gravityController5 = new b2GravityController();
+      var gravityController6 = new b2GravityController();
+
+
+      gravityController1.G = local_forces[0];
+      gravityController2.G = local_forces[1];
+      gravityController3.G = local_forces[2];
+      gravityController4.G = local_forces[2];
+      gravityController5.G = local_forces[2];
+      gravityController6.G = local_forces[2];
+
+
+      //Set force between yellow pucks
+      gravityController1.AddBody(yellow_circle1);
+      gravityController1.AddBody(yellow_circle2);
+
+      //Set force between red pucks
+      gravityController2.AddBody(red_circle1);
+      gravityController2.AddBody(red_circle2);
+
+      //Set forces between yellows and reds
+      gravityController3.AddBody(yellow_circle1);
+      gravityController3.AddBody(red_circle1);
+
+      gravityController4.AddBody(yellow_circle1);
+      gravityController4.AddBody(red_circle2);
+
+      gravityController5.AddBody(yellow_circle2);
+      gravityController5.AddBody(red_circle1);
+
+      gravityController6.AddBody(yellow_circle2);
+      gravityController6.AddBody(red_circle2);
+
+
+      world.AddController(gravityController1);
+      world.AddController(gravityController2);
+      world.AddController(gravityController3);
+      world.AddController(gravityController4);
+      world.AddController(gravityController5);
+      world.AddController(gravityController6);
+
+      var timeline_columns = ["frame", "time", "idControlledObject", "mouseX", "mouseY"];
+      var event_columns = ["frame", "time", "eventCounter", "obj1", "obj2"]; 
+      for (var i = 0; i < bodies.length; i++) {
+        var body = bodies[i];
+        if(body.m_userData.bodyType=="dynamic"){
+          timeline_columns.push(body.m_userData.name + ".x");
+          timeline_columns.push(body.m_userData.name + ".y");
+          timeline_columns.push(body.m_userData.name + ".vx");
+          timeline_columns.push(body.m_userData.name + ".vy");
+          event_columns.push(body.m_userData.name + ".x");
+          event_columns.push(body.m_userData.name + ".y");
+          event_columns.push(body.m_userData.name + ".vx");
+          event_columns.push(body.m_userData.name + ".vy");
+        }
+      }
+      console.log(timeline_columns, event_columns);
+      var d = new Date();
+      data.setup.start_time = d.getTime();
+      data.setup.learning_condition = learn_cond;
+      data.setup.box2d_ratio = ratio;
+      data.setup.pixel_ratio = window.devicePixelRatio;
+      data.setup.stage_width = stage.stageWidth;
+      data.setup.stage_height = stage.stageHeight;
+      data.setup.fullX = fullX;
+      data.setup.fullY = fullY;
+      data.setup.wall_setup = wall_setup;
+      data.setup.wall_mass = wall_mass;
+      data.setup.wall_elasticity = wall_elasticity;
+      data.setup.wall_friction = wall_friction;
+      data.setup.wall_damping = wall_damping;
+      data.setup.CO_damping = CO_damping;
+      data.setup.box2d_step_size = stepSize;
+      data.setup.gravity_east = gravity_east;
+      data.setup.gravity_south = gravity_south;
+      data.setup.local_forces_yy = local_forces[0];
+      data.setup.local_forces_rr = local_forces[1];
+      data.setup.local_forces_yr = local_forces[2];
+      data.setup.y_c_mass = y_c_mass;
+      data.setup.y_c_radius = ballWidth;
+      data.setup.y_c_elasticity = y_c_elasticity;
+      data.setup.y_c_friction = y_c_friction;
+      data.setup.y_c_damping = damping;
+      data.setup.r_c_mass = r_c_mass;
+      data.setup.r_c_radius = ballWidth;
+      data.setup.r_c_elasticity = r_c_elasticity;
+      data.setup.r_c_friction = r_c_friction;
+      data.setup.r_c_damping = damping;
+      data.setup.fist_mass = fist_mass;
+      data.setup.fist_elasticity = fist_elasticity;
+      data.setup.fist_friction = fist_friction;
+      data.setup.patch_width = patch_width;
+      data.setup.patch_height = patch_height;
+      data.setup.patch_damping = patch_damping;
+      data.setup.border_width = borderWidth;
+      data.setup.timeline_columns = timeline_columns;
+      data.setup.event_columns = event_columns;
+      console.log(data.setup);
+ 
+      StartUpdate();
+
+      console.log('Condition in iframe: Trial', trial, '\nGravity_east', gravity_east, 'Gravity_south', gravity_south,
+        'Yellow mass', y_c_mass, 'Yellow elasticity', y_c_elasticity, 'Red mass', r_c_mass, 'Red elasticity', r_c_elasticity, 'Local forces: Within yellow', local_forces[0], 'within red', local_forces[1], 'between', local_forces[2],
+        'Patch stickyness', patch_damping,
+        '(un-settable) global damping', damping, '(un-settable) ball friction', y_c_friction, r_c_friction, '(un-settable) wall elasticity', wall_elasticity,
+        '(un-settable) wall friction', wall_friction,
+        'fullX', fullX, 'fullY', fullY, 'stage.stageWidth', stage.stageWidth, 'stage.stageHeight', stage.stageHeight, 'ratio', ratio, 'window.devicePixelRatio', window.devicePixelRatio);
+
+      //////////////////////
+      //End of start function
+      /////////////////////
+
+    }
+
+
+    ////////////////////////////////////////////////
+    //Makes a square object in the box2d environment
+    ////////////////////////////////////////////////
+    function createBox(w, h, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img) {
+
+      // Create the fixture definition
+      var fixDef = new b2FixtureDef;
+
+      fixDef.density = density; // Set the density
+      fixDef.friction = friction; // Set the friction 
+      fixDef.restitution = restitution; // Set the restitution - elasticity
+
+      // Define the shape of the fixture
+      fixDef.shape = new b2PolygonShape;
+      fixDef.shape.SetAsBox(
+        w // input should be half the width
+        , h // input should be half the height 
+      );
+
+      // Create the body definition
+      var bodyDef = new b2BodyDef;
+      bodyDef.type = type;
+
+      // Set the position of the body
+      bodyDef.position.x = x;
+      bodyDef.position.y = y;
+
+      // Set the damping (This was not working, any idea why not??)
+      //bodyDef.linearDamping = defaultFor(damping, 0.1);
+
+      // Create the body in the box2d world
+      var b = world.CreateBody(bodyDef);
+      b.CreateFixture(fixDef);
+
+      //What is userData exactly, and how do we use it?
+      if (typeof userData !== 'undefined') {
+        b.SetUserData(userData);
+      }
+
+      b.m_linearDamping = damping;
+
+      isRendered = defaultFor(isRendered, false);
+
+      if (isRendered) {
+        bodies.push(b);
+      }
+
+      if (typeof img !== 'undefined') {
+        var bd = new BitmapData(img);
+        var bm = new Bitmap(bd);
+        bm.x = -50;
+        bm.y = -50;
+        var actor = new Sprite();
+        actor.addChild(bm);
+        actor.scaleX = 2 * w * window.devicePixelRatio;
+        actor.scaleY = 2 * h * window.devicePixelRatio;
+        stage.addChild(actor);
+        actors.push(actor);
+      }
+
+      return b;
+    }
+
+
+
+    ////////////////////////////////////////////////
+    //Makes a round object in the box2d environment
+    ////////////////////////////////////////////////
+    function createBall(r, x, y, starting_vec, type, density, damping, friction, restitution, userData, isRendered, stage, img) {
+      // Create the fixture definition
+      var fixDef = new b2FixtureDef;
+
+      fixDef.density = density; // Set the density
+      fixDef.friction = friction; // Set the friction
+      fixDef.restitution = restitution; // Set the restitution - bounciness
+
+      // Define the shape of the fixture
+      fixDef.shape = new b2CircleShape;
+      fixDef.shape.SetRadius(r);
+
+      // Create the body definition
+      var bodyDef = new b2BodyDef;
+      bodyDef.type = type;
+
+      // Set the position of the body
+      bodyDef.position.x = x;
+      bodyDef.position.y = y;
+
+      // Create the body in the box2d world
+      var b = world.CreateBody(bodyDef);
+      b.CreateFixture(fixDef);
+
+      // Set the damping  (This was not working, any idea why not??)
+      //bodyDef.linearDamping = defaultFor(damping, 0.1);
+
+      if (typeof userData !== 'undefined') {
+        b.SetUserData(userData);
+      }
+
+      //his workaround seems to do the trick
+      b.m_linearDamping = damping;
+
+      //console.log('create_ball_check', b)
+
+      b.SetLinearVelocity(starting_vec);
+      //.ApplyImpulse(up, bodies[i].GetWorldCenter());
+
+      isRendered = defaultFor(isRendered, false);
+      if (isRendered) {
+        bodies.push(b);
+      }
+      if (typeof img !== 'undefined') {
+        var bd = new BitmapData(img);
+        var bm = new Bitmap(bd);
+        bm.x = -50;
+        bm.y = -50;
+        bm.obj_ix = actors.length; //How to pass the id of the ball to functions called by event listeners on the sprites
+        var actor = new Sprite();
+        actor.addChild(bm);
+        actor.scaleX = 2 * r * window.devicePixelRatio;
+        actor.scaleY = 2 * r * window.devicePixelRatio;
+        stage.addChild(actor);
+
+        //console.log(bm);
+        actors.push(actor);
+      }
+
+
+
+      return b;
+    }
+
+    function getSensorContact(contact) {
+      var fixtureA = contact.GetFixtureA();
+      var fixtureB = contact.GetFixtureB();
+
+      var sensorA = fixtureA.IsSensor();
+      var sensorB = fixtureB.IsSensor();
+
+      if (!(sensorA || sensorB))
+        return false;
+
+      var bodyA = fixtureA.GetBody();
+      var bodyB = fixtureB.GetBody();
+
+      if (sensorA) { // bodyB should be added/removed to the buoyancy controller
+        return {
+          sensor: bodyA,
+          body: bodyB
+        };
+      } else { // bodyA should be added/removed to the buoyancy controller
+        return {
+          sensor: bodyB,
+          body: bodyA
+        };
+      }
+    }
+
+
+    //A useful function that replaces 'undefined's when a value is not set in a function, with a default value
+    function defaultFor(arg, val) {
+      return typeof arg !== 'undefined' ? arg : val;
+    }
+
+
+
+    //////////////////
+    //Action functions
+    //////////////////
+
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    //The key function that updates the world by stepping the physics simulator forwards
+    ///////////////////////////////////////////////////////////////////////////////////
+    
+    function onEF(e) {
+      //console.log(stepSize)
+      world.Step(stepSize, 3, 3);
+      world.ClearForces();
+
+      if (window.devicePixelRatio!=initial_pixel_ratio)
+      {
+        zoomConstant = false;
+      }
+
+      var tmp = [];
+      var velocities = [];
+
+      if (e.target.mouseX > 0 | e.target.mouseY > 0) {
+        mouse_initially_entered_frame = true;
+      }
+
+      if (mouse_initially_entered_frame == true) {
+        xPos = e.target.mouseX;
+        yPos = e.target.mouseY;
+      }
+
+      
+      tmp.push(data.timeline.length + 1); //Store row number
+
+      var d = new Date();
+      tmp.push(d.getTime() - data.setup.start_time);
+      if (idControlledObject!=undefined)
+      {
+        tmp.push(bodies[idControlledObject].m_userData.name);  
+      } else{
+        tmp.push('none');
+      }
+      
+
+      tmp.push(xPos); //Keep the cursor position here
+      tmp.push(yPos);
+
+      for (var i = 0; i < actors.length; i++) {
+        var body = bodies[i];
+        var actor = actors[i];
+        var p = body.GetPosition();
+        actor.x = p.x * ratio; // updating actor (100 is the pixals to meters ratio)
+        actor.y = p.y * ratio;
+        actor.rotation = 0;
+        if(body.m_userData.bodyType=="dynamic")
+        {
+          //tmp.push(i);
+          //tmp.push(body.m_userData.name);
+          tmp.push(Math.round(p.x * 1000) / 1000);
+          tmp.push(Math.round(p.y * 1000) / 1000);
+          //tmp.push(Math.round(body.m_userData.W * 1000) / 1000);
+          //tmp.push(Math.round(body.m_userData.H * 1000) / 1000);
+          tmp.push(Math.round(body.m_linearVelocity.x * 1000) / 1000);
+          tmp.push(Math.round(body.m_linearVelocity.y * 1000) / 1000);
+          //tmp.push(Math.round(body.m_mass * 1000) / 1000);
+        }
+        
+
+        velocities.push([body.m_linearVelocity.x, body.m_linearVelocity.y]);
+      }
+
+
+      console.log("data.timeline.length", data.timeline.length)
+      data.timeline[data.timeline.length] = tmp; //Append the data
+
+      if (idControlledObject != undefined) {
+        var body = bodies[idControlledObject]; //Select the fist
+
+        var tmp = body.GetLinearVelocity();
+        var fistSpeed = Math.sqrt(Math.pow(tmp.x, 2), Math.pow(tmp.y, 2))
+
+
+
+        var xCO = body.GetPosition().x; //Position of controlled object
+        var yCO = body.GetPosition().y; //Position of controlled object
+
+        //This is pretty heuristic force increases rapidly for farther distances from cursor
+        //but is also damped by the current velocity to prevent it getting too crazy
+        var xVec = Math.pow(2 * (xPos / ratio - xCO), 1); //fistSpeed; 
+        var yVec = Math.pow(2 * (yPos / ratio - yCO), 1); //fistSpeed;    
+        var armForce = new b2Vec2(xVec, yVec);
+        body.ApplyImpulse(armForce, body.GetWorldCenter())
+      }
+
+      ///////////////////////////////////////////////////////////////////////////////
+      //PASSIVE CONTITION ONLY, REFRESH THE BALL LOCATIONS AND VELOCITIES IF THEY STOP
+      ///////////////////////////////////////////////////////////////////////////////
+      if (learn_cond==0)
+      {
+        //Stopping criteria
+        sc1 = 1;
+        sc2 = .5;
+        vel_vecs = [];
+        for (var i = 0; i < velocities.length; i++) {
+          vel_vecs[i] = Math.sqrt(Math.pow(velocities[i][0], 2) + Math.pow(velocities[i][1], 2));
+        }
+        //console.log('vel_vecs', vel_vecs);
+
+        //If everything has stopped, give the balls new velocities and locations
+        if (vel_vecs.max() < stopCrit) {
+          StopUpdate();
+          //Close curtain
+          stage.addChild(curtain);
+
+          var newLocs = RandomLocations(4);
+          //console.log(newLocs)
+          for (var i = 0; i < actors.length; i++) {
+            if (bodies[i].m_userData.name == "yellow_circle1" |
+              bodies[i].m_userData.name == "yellow_circle2" |
+              bodies[i].m_userData.name == "red_circle1" |
+              bodies[i].m_userData.name == "red_circle2") {
+              
+              var rv = new b2Vec2((Math.random() * 20 - 10), (Math.random() * 20 - 10));
+              var rl = new b2Vec2(newLocs[0][0], newLocs[0][1]);
+              newLocs.shift();
+
+              bodies[i].SetLinearVelocity(rv);
+              bodies[i].SetPosition(rl);
+              //console.log('object', bodies[i].m_userData.name, 'new vec', rv, 'new loc', rl, fullX, fullY);
+            }
+          }
+
+          setTimeout(unpauseAndRegen, howLongPauseOnRefresh);
+        }
+      }
+      
+      if (learn_cond!=0)
+      {
+        $('#c').css('cursor', 'crosshair');        
+      }
+
+
+
+
+      if (Math.round(data.timeline.length/300)==(data.timeline.length/300))
+      {
+        //Occasionally print the counter
+        console.log(data.timeline[data.timeline.length - 1][0], data.timeline[data.timeline.length - 1][1]);
+      }
+
+      if (data.timeline.length > stopTime) {
+        EndClip();
+      }
+    }
+
+
+    
+
+    //////////////////////////////////////////////
+    //Slows down objects if they go over the patch
+    //////////////////////////////////////////////
+    var listener = new b2ContactListener();
+    listener.BeginContact = function(contact) {
+
+
+      //////////////
+      //Store events
+      //////////////
+
+      //console.log('AB:',[contact.GetFixtureA().GetBody().GetUserData().name, contact.GetFixtureB().GetBody().GetUserData().name].sort());
+
+      var tmp = [];
+      var tmp2 = [contact.GetFixtureA().GetBody().GetUserData().name, contact.GetFixtureB().GetBody().GetUserData().name].sort(); //Contact entities
+      tmp.push(data.timeline.length + 1); //Store latest frame
+      var d = new Date();
+      tmp.push(d.getTime());//Store the time
+      tmp.push(data.events.length + 1); //Store event number
+      tmp.push(tmp2[0]); //The colliding objects (in alphabetical order)
+      tmp.push(tmp2[1]);
+
+      for (var i = 0; i < actors.length; i++) {
+        tmp.push(i);
+        var body = bodies[i];
+        var actor = actors[i];
+        var p = body.GetPosition();
+        actor.x = p.x * ratio; // updating actor (100 is the pixels to meters ratio)
+        actor.y = p.y * ratio;
+        actor.rotation = 0; //??
+        
+
+
+        if(body.m_userData.bodyType=="dynamic")
+        {
+          //tmp.push(i);
+          //tmp.push(body.m_userData.name);
+          tmp.push(Math.round(p.x * 1000) / 1000);
+          tmp.push(Math.round(p.y * 1000) / 1000);
+          //tmp.push(Math.round(body.m_userData.W * 1000) / 1000);
+          //tmp.push(Math.round(body.m_userData.H * 1000) / 1000);
+          tmp.push(Math.round(body.m_linearVelocity.x * 1000) / 1000);
+          tmp.push(Math.round(body.m_linearVelocity.y * 1000) / 1000);
+          //tmp.push(Math.round(body.m_mass * 1000) / 1000);
+        }
+      }
+
+
+
+      data.events.push(tmp);
+
+      //Patch stuff
+      var contactEntities = getSensorContact(contact);
+
+      if (contactEntities) {
+        console.log('inner', contactEntities.sensor, contactEntities.sensor.GetUserData())
+        var sensor = contactEntities.sensor;
+        if (sensor.GetUserData()) {
+          var userData = sensor.GetUserData();
+          if (userData.controller) {
+            console.log('inner inner', userData.controller)
+            userData.controller.AddBody(contactEntities.body);
+
+          }
+        }
+      }
+
+    }
+
+
+
+    listener.EndContact = function(contact) {
+      var contactEntities = getSensorContact(contact);
+
+      if (contactEntities) {
+        var sensor = contactEntities.sensor;
+        if (sensor.GetUserData()) {
+          var userData = sensor.GetUserData();
+          if (userData.controller) {
+            userData.controller.RemoveBody(contactEntities.body);
+          }
+        }
+      }
+    }
+
+
+
+    function RandomLocations(n) {
+
+      var array = [];
+
+      array.push([Math.random() * fullX, Math.random() * fullY]);
+      console.log('new locations...')
+        //Loop over the number of new locations needed
+
+        for (var i = 1; i < n; i++) {
+
+          var okLoc = false;
+          while (okLoc == false) {
+            proposal = [Math.random() * fullX, Math.random() * fullY];
+              //Check loc
+              okLoc = true;
+              
+              //Check they are not within a ball width of the edge
+              if (proposal[0] < (2*ballWidth) | proposal[0]>(fullX-(2*ballWidth)) |
+                proposal[1] < (2*ballWidth) | proposal[1]>(fullY-(2*ballWidth)))
+              {
+                console.log('Too near edge', proposal)
+                okLoc = false;
+              }
+              
+              for (var j = 0; j < array.length; j++) {
+              	//Check they don't overlap
+                if ((proposal[0] - array[j][0]) < ballWidth &
+                  (proposal[0] - array[j][0]) > (-ballWidth) &
+                  (proposal[1] - array[j][1]) < ballWidth &
+                  (proposal[1] - array[j][1]) > (-ballWidth)) {
+                  console.log('conflict', array[j], proposal)
+                  okLoc = false;
+                }
+                
+              }
+            }
+            //console.log('no conflict', array, proposal)
+            array.push(proposal)
+          }
+
+          return array;
+      }
+
+        
+      Array.prototype.max = function() {
+        return Math.max.apply(null, this);
+      };
+
+      function unpauseAndRegen() {
+
+      //Open curtain...
+      stage.removeChild(curtain);
+      StartUpdate();
+    }
+
+    function AssumeControl (e) {
+
+      //Reset damping parameter of previously controlled object if necessary
+      if (e.target.obj_ix!=undefined)
+      {
+        idControlledObject = e.target.obj_ix;
+        bodies[idControlledObject].m_linearDamping = CO_damping;
+        console.log('took control of', idControlledObject);//, e.target
+
+         // var bd = new BitmapData('gray_circle.png');
+         var bd = new BitmapData('/static/images/black_circle_border.png');
+          bm = new Bitmap(bd);  bm.x = -50; bm.y = -50;
+         
+         actors[idControlledObject].addChild(bm); //Add "controlled object" overlay
+
+         //console.log('bm after', actors[idControlledObject], bm);
+      } else{
+        console.log('missed!');
+      }
+
+      
+    }
+
+    function RenegeControl (e) {
+
+      //Reset damping parameter of previously controlled object if necessary
+      if (idControlledObject!=undefined){
+            
+          bodies[idControlledObject].m_linearDamping = damping;
+          actors[idControlledObject].removeChild(bm); //Remove "controlled object" overlay e.target//e.target
+          console.log('released control of', idControlledObject);
+          idControlledObject = undefined;
+
+      }
+    }
+
+    function EndClip() {
+      
+      StopUpdate();
+      stage.addChild(curtain);
+
+      data.setup.zoomConstant = zoomConstant;
+
+      //record setup data in a simple array that is then accessed from task.js
+      data.constants = [data.setup.start_time,data.setup.learning_condition,data.setup.box2d_ratio,data.setup.pixel_ratio,data.setup.stage_width,data.setup.stage_height,data.setup.fullX,data.setup.fullY,data.setup.wall_setup,data.setup.wall_mass,data.setup.wall_elasticity,data.setup.wall_friction,data.setup.wall_damping,data.setup.CO_damping,data.setup.box2d_step_size,data.setup.gravity_east,data.setup.gravity_south,data.setup.local_forces_yy,data.setup.local_forces_rr,data.setup.local_forces_yr,data.setup.y_c_mass,data.setup.y_c_radius,data.setup.y_c_elasticity,data.setup.y_c_friction,data.setup.y_c_damping,data.setup.r_c_mass,data.setup.r_c_radius,data.setup.r_c_elasticity,data.setup.r_c_friction,data.setup.r_c_damping,data.setup.fist_mass,data.setup.fist_elasticity,data.setup.fist_friction,data.setup.patch_width,data.setup.patch_height,data.setup.patch_damping,data.setup.border_width];
+      
+      parent.GetPhysicsData();
+
+      console.log('Total number of steps performed:', data.timeline[data.timeline.length - 1][0],
+        'total clock time', data.timeline[data.timeline.length - 1][1], 'zoomConstant', zoomConstant);
+
+      for (var i = 0; i < actors.length; i++) {
+          
+          var actor = actors[i];
+          var body = bodies[i];
+          stage.removeChild(actor);
+          //And destroy bodies?
+          world.DestroyBody(body);
+        }
+        
+
+
+      // //stage.removeChild(curtain);
+       bodies = []; // clear the body and actor vectors
+       actors = []; //
+
+      data.setup = [];
+      data.timeline = [];
+      data.events = [];
+      data.constants = [];
+      console.log('End of trial clearing check', actors, bodies, data);
+    }
+
+
+    function StartUpdate() {
+      console.log('Added the onEF listener');
+      stage.addEventListener(Event.ENTER_FRAME, onEF);
+      if (learn_cond==2)
+      {
+          stage.addEventListener(MouseEvent.MOUSE_DOWN, AssumeControl);
+          stage.addEventListener(MouseEvent.MOUSE_UP, RenegeControl);
+      }
+
+      //stage.addEventListener(MouseEvent.MOUSE_MOVE, Follow);
+    }
+
+    function StopUpdate() {
+      console.log('Removed the onEF listener');
+      stage.removeEventListener(Event.ENTER_FRAME, onEF);
+      if (learn_cond==2)
+      {
+        stage.removeEventListener(MouseEvent.MOUSE_DOWN, AssumeControl);
+        stage.removeEventListener(MouseEvent.MOUSE_UP, RenegeControl);
+      }  
+      //stage.removeEventListener(MouseEvent.MOUSE_MOVE, Follow);
+    }
+
+    function Pause() {
+      StopUpdate();
+
+    }
+
+    function Resume() {
+      StartUpdate();
+    }
+
+    function RemoveCurtain() {
+      if (stage != undefined )
+      {
+        stage.removeChild(curtain);
+      }
+    }
+
+
+  </script>
+</head>
+<body>
+  <canvas width="300" height="225" id="c" onload="removeCursor()"></canvas>
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+[HIT Configuration]
+title = Psychology experiment on learning about physical scenes
+description = The experiment takes ~20 minutes. Your task is to play a physics game and figure out how it works. You can receive a bonus of up to $2.00 depending on your performance.
+amt_keywords = psychology, cognitive science, physics game 
+lifetime = 24
+us_only = true
+approve_requirement = 95
+contact_email_on_error = neil.bramley@nyu.edu
+ad_group = active_physics
+psiturk_keywords = psychology, cognitive science, intuitive physics, learning
+organization_name = NYU
+browser_exclude_rule = MSIE, mobile, tablet
+
+[Database Parameters]
+database_url = sqlite:///participants.db
+table_name = active_physics
+
+[Server Parameters]
+host = 0.0.0.0
+port = 22362
+cutoff_time = 90
+logfile = server.log
+loglevel = 0
+debug = true
+login_username = 
+login_pw = 
+threads = auto
+
+[Task Parameters]
+experiment_code_version = experiment_5
+num_conds = 40
+num_counters = 2
+
+[Shell Parameters]
+launch_in_sandbox_mode = true

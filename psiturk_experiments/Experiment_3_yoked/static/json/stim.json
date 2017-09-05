@@ -1,0 +1,2981 @@
+{
+  "details": {
+    "A2MWAXV1YRK5GH": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          267,
+          87,
+          357,
+          177
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          153,
+          243,
+          63,
+          333
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          282,
+          12,
+          102,
+          192
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          35,
+          215,
+          125,
+          305
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          235,
+          145,
+          325,
+          55
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          2,
+          92,
+          182,
+          272
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          174,
+          264,
+          354,
+          84
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          21,
+          201,
+          291,
+          111
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          329,
+          59,
+          239,
+          149
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          108,
+          18,
+          198,
+          288
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          87,
+          267,
+          177,
+          357
+        ]
+      }
+    ],
+    "A1P0NNR8HOQ95R": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          89,
+          359,
+          179,
+          269
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          26,
+          296,
+          116,
+          206
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          166,
+          256,
+          76,
+          346
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          38,
+          308,
+          218,
+          128
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          86,
+          266,
+          176,
+          356
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          100,
+          10,
+          190,
+          280
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          268,
+          358,
+          178,
+          88
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          214,
+          304,
+          34,
+          124
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          215,
+          35,
+          305,
+          125
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          186,
+          6,
+          276,
+          96
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          55,
+          325,
+          235,
+          145
+        ]
+      }
+    ],
+    "A3VMKLJTSGYKHN": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          164,
+          344,
+          254,
+          74
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          186,
+          96,
+          276,
+          6
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          114,
+          294,
+          24,
+          204
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          254,
+          164,
+          344,
+          74
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          353,
+          173,
+          263,
+          83
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          73,
+          163,
+          253,
+          343
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          86,
+          266,
+          176,
+          356
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          42,
+          222,
+          132,
+          312
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          71,
+          161,
+          341,
+          251
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          310,
+          130,
+          40,
+          220
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          191,
+          101,
+          11,
+          281
+        ]
+      }
+    ],
+    "A33QUS4NRVVMTN": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          167,
+          77,
+          257,
+          347
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          129,
+          39,
+          219,
+          309
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          154,
+          244,
+          64,
+          334
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          68,
+          338,
+          158,
+          248
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          356,
+          176,
+          86,
+          266
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          100,
+          10,
+          190,
+          280
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          127,
+          307,
+          37,
+          217
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          46,
+          316,
+          226,
+          136
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          246,
+          156,
+          66,
+          336
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          219,
+          309,
+          39,
+          129
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          69,
+          339,
+          249,
+          159
+        ]
+      }
+    ],
+    "A25MM8IKSW3G19": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          358,
+          88,
+          178,
+          268
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          74,
+          164,
+          254,
+          344
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          266,
+          176,
+          86,
+          356
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          126,
+          36,
+          306,
+          216
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          267,
+          357,
+          177,
+          87
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          278,
+          98,
+          188,
+          8
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          284,
+          104,
+          194,
+          14
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          67,
+          157,
+          337,
+          247
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          269,
+          179,
+          89,
+          359
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          239,
+          329,
+          59,
+          149
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          300,
+          120,
+          30,
+          210
+        ]
+      }
+    ],
+    "A2N0FUQBDQRBN5": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          16,
+          196,
+          106,
+          286
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          178,
+          268,
+          88,
+          358
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          91,
+          181,
+          271,
+          1
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          6,
+          276,
+          96,
+          186
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          113,
+          293,
+          203,
+          23
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          294,
+          24,
+          114,
+          204
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          339,
+          249,
+          159,
+          69
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          132,
+          312,
+          222,
+          42
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          294,
+          204,
+          24,
+          114
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          144,
+          324,
+          54,
+          234
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          68,
+          158,
+          248,
+          338
+        ]
+      }
+    ],
+    "A2Z96TK65BB7LC": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          282,
+          192,
+          102,
+          12
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          294,
+          204,
+          24,
+          114
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          189,
+          99,
+          9,
+          279
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          238,
+          58,
+          328,
+          148
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          41,
+          131,
+          311,
+          221
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          101,
+          11,
+          191,
+          281
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          288,
+          108,
+          18,
+          198
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          34,
+          124,
+          304,
+          214
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          113,
+          23,
+          293,
+          203
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          127,
+          217,
+          37,
+          307
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          307,
+          37,
+          217,
+          127
+        ]
+      }
+    ],
+    "A3W6T1WDYXMR3": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          341,
+          161,
+          251,
+          71
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          120,
+          300,
+          30,
+          210
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          223,
+          313,
+          133,
+          43
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          127,
+          217,
+          37,
+          307
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          273,
+          93,
+          183,
+          3
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          251,
+          161,
+          341,
+          71
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          44,
+          134,
+          224,
+          314
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          110,
+          290,
+          200,
+          20
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          158,
+          338,
+          248,
+          68
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          224,
+          134,
+          44,
+          314
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          159,
+          339,
+          249,
+          69
+        ]
+      }
+    ],
+    "AVC1PLLFS210S": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          17,
+          287,
+          197,
+          107
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          21,
+          291,
+          111,
+          201
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          145,
+          325,
+          235,
+          55
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          171,
+          351,
+          261,
+          81
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          49,
+          229,
+          319,
+          139
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          267,
+          177,
+          87,
+          357
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          57,
+          237,
+          147,
+          327
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          232,
+          142,
+          52,
+          322
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          70,
+          340,
+          160,
+          250
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          175,
+          265,
+          355,
+          85
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          71,
+          341,
+          251,
+          161
+        ]
+      }
+    ],
+    "A28HYRF3QXFAXL": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          32,
+          122,
+          302,
+          212
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          67,
+          247,
+          337,
+          157
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          302,
+          212,
+          32,
+          122
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          171,
+          261,
+          81,
+          351
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          254,
+          74,
+          164,
+          344
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          92,
+          182,
+          2,
+          272
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          351,
+          261,
+          81,
+          171
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          174,
+          84,
+          264,
+          354
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          104,
+          14,
+          194,
+          284
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          307,
+          217,
+          127,
+          37
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          189,
+          99,
+          279,
+          9
+        ]
+      }
+    ],
+    "A4J4GGMKJ68L0": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          41,
+          221,
+          311,
+          131
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          107,
+          17,
+          287,
+          197
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          128,
+          308,
+          38,
+          218
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          94,
+          184,
+          4,
+          274
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          156,
+          66,
+          246,
+          336
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          107,
+          287,
+          17,
+          197
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          261,
+          81,
+          171,
+          351
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          184,
+          4,
+          274,
+          94
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          149,
+          329,
+          239,
+          59
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          61,
+          331,
+          241,
+          151
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          60,
+          330,
+          150,
+          240
+        ]
+      }
+    ],
+    "A27W025UEXS1G0": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          272,
+          2,
+          182,
+          92
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          294,
+          204,
+          114,
+          24
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          68,
+          158,
+          338,
+          248
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          251,
+          161,
+          71,
+          341
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          191,
+          281,
+          11,
+          101
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          80,
+          260,
+          350,
+          170
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          28,
+          208,
+          298,
+          118
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          53,
+          233,
+          143,
+          323
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          275,
+          5,
+          185,
+          95
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          284,
+          104,
+          14,
+          194
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          194,
+          104,
+          284,
+          14
+        ]
+      }
+    ],
+    "A2EI075XZT9Y2S": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          297,
+          117,
+          27,
+          207
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          332,
+          62,
+          152,
+          242
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          294,
+          114,
+          24,
+          204
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          265,
+          175,
+          355,
+          85
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          59,
+          239,
+          329,
+          149
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          312,
+          132,
+          42,
+          222
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          146,
+          326,
+          236,
+          56
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          48,
+          138,
+          228,
+          318
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          177,
+          357,
+          87,
+          267
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          271,
+          1,
+          181,
+          91
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          121,
+          31,
+          301,
+          211
+        ]
+      }
+    ],
+    "ANV4TUKMWLA8E": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          120,
+          30,
+          210,
+          300
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          344,
+          74,
+          164,
+          254
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          303,
+          33,
+          123,
+          213
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          348,
+          258,
+          78,
+          168
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          45,
+          225,
+          135,
+          315
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          332,
+          242,
+          62,
+          152
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          239,
+          149,
+          59,
+          329
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          183,
+          3,
+          93,
+          273
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          290,
+          110,
+          200,
+          20
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          4,
+          184,
+          94,
+          274
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          298,
+          118,
+          208,
+          28
+        ]
+      }
+    ],
+    "ASTDBTVY3WP1K": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          83,
+          353,
+          173,
+          263
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          282,
+          102,
+          12,
+          192
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          119,
+          29,
+          209,
+          299
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          305,
+          215,
+          35,
+          125
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          216,
+          306,
+          126,
+          36
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          230,
+          140,
+          320,
+          50
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          300,
+          30,
+          210,
+          120
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          238,
+          58,
+          148,
+          328
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          40,
+          220,
+          130,
+          310
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          76,
+          166,
+          346,
+          256
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          115,
+          295,
+          205,
+          25
+        ]
+      }
+    ],
+    "AHB3QFZSFN9DL": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          327,
+          237,
+          147,
+          57
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          109,
+          199,
+          289,
+          19
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          44,
+          224,
+          314,
+          134
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          290,
+          110,
+          200,
+          20
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          314,
+          134,
+          224,
+          44
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          45,
+          225,
+          315,
+          135
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          27,
+          207,
+          117,
+          297
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          3,
+          93,
+          183,
+          273
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          134,
+          314,
+          44,
+          224
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          345,
+          165,
+          75,
+          255
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          179,
+          359,
+          89,
+          269
+        ]
+      }
+    ],
+    "ANZKTE853UXSD": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          36,
+          306,
+          216,
+          126
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          54,
+          324,
+          234,
+          144
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          88,
+          358,
+          178,
+          268
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          42,
+          222,
+          312,
+          132
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          121,
+          301,
+          211,
+          31
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          163,
+          343,
+          253,
+          73
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          85,
+          265,
+          355,
+          175
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          239,
+          149,
+          329,
+          59
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          1,
+          91,
+          271,
+          181
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          303,
+          33,
+          123,
+          213
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          40,
+          310,
+          130,
+          220
+        ]
+      }
+    ],
+    "A38HFMRXB5Q13M": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          272,
+          2,
+          182,
+          92
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          316,
+          136,
+          46,
+          226
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          88,
+          358,
+          268,
+          178
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          102,
+          192,
+          12,
+          282
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          260,
+          350,
+          170,
+          80
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          128,
+          308,
+          218,
+          38
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          47,
+          317,
+          227,
+          137
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          327,
+          57,
+          147,
+          237
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          86,
+          356,
+          176,
+          266
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          218,
+          38,
+          308,
+          128
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          146,
+          326,
+          56,
+          236
+        ]
+      }
+    ],
+    "A3527QDVIOHI8E": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          180,
+          270,
+          90,
+          0
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          119,
+          29,
+          209,
+          299
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          299,
+          119,
+          29,
+          209
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          321,
+          51,
+          231,
+          141
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          44,
+          314,
+          134,
+          224
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          137,
+          227,
+          317,
+          47
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          343,
+          253,
+          163,
+          73
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          273,
+          3,
+          183,
+          93
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          259,
+          349,
+          79,
+          169
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          146,
+          236,
+          326,
+          56
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          225,
+          315,
+          45,
+          135
+        ]
+      }
+    ],
+    "AV22FQTJNBUZT": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          220,
+          310,
+          130,
+          40
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          28,
+          298,
+          208,
+          118
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          162,
+          72,
+          342,
+          252
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          346,
+          166,
+          76,
+          256
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          91,
+          181,
+          1,
+          271
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          148,
+          328,
+          238,
+          58
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          70,
+          160,
+          340,
+          250
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          161,
+          251,
+          341,
+          71
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "0",
+        "hues": [
+          166,
+          76,
+          346,
+          256
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "0",
+        "hues": [
+          218,
+          128,
+          308,
+          38
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "0",
+        "hues": [
+          212,
+          32,
+          302,
+          122
+        ]
+      }
+    ],
+    "A7RAVFS10BUZ1": [
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          79,
+          259,
+          169,
+          349
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          197,
+          287,
+          17,
+          107
+        ]
+      },
+      {
+        "worldId": "4",
+        "tR": "none",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          94,
+          274,
+          184,
+          4
+        ]
+      },
+      {
+        "worldId": "7",
+        "tR": "repel",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          26,
+          116,
+          206,
+          296
+        ]
+      },
+      {
+        "worldId": "2",
+        "tR": "attract",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          233,
+          143,
+          53,
+          323
+        ]
+      },
+      {
+        "worldId": "1",
+        "tR": "attract",
+        "tM": "same",
+        "origCounterbalance": "1",
+        "hues": [
+          101,
+          191,
+          11,
+          281
+        ]
+      },
+      {
+        "worldId": "8",
+        "tR": "repel",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          320,
+          140,
+          230,
+          50
+        ]
+      },
+      {
+        "worldId": "6",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          245,
+          65,
+          155,
+          335
+        ]
+      },
+      {
+        "worldId": "5",
+        "tR": "none",
+        "tM": "A",
+        "origCounterbalance": "1",
+        "hues": [
+          80,
+          350,
+          170,
+          260
+        ]
+      },
+      {
+        "worldId": "3",
+        "tR": "none",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          236,
+          146,
+          56,
+          326
+        ]
+      },
+      {
+        "worldId": "9",
+        "tR": "repel",
+        "tM": "B",
+        "origCounterbalance": "1",
+        "hues": [
+          342,
+          72,
+          252,
+          162
+        ]
+      }
+    ]
+  },
+  "yokers": [
+    "A2MWAXV1YRK5GH",
+    "A1P0NNR8HOQ95R",
+    "A3VMKLJTSGYKHN",
+    "A33QUS4NRVVMTN",
+    "A25MM8IKSW3G19",
+    "A2N0FUQBDQRBN5",
+    "A2Z96TK65BB7LC",
+    "A3W6T1WDYXMR3",
+    "AVC1PLLFS210S",
+    "A28HYRF3QXFAXL",
+    "A4J4GGMKJ68L0",
+    "A27W025UEXS1G0",
+    "A2EI075XZT9Y2S",
+    "ANV4TUKMWLA8E",
+    "ASTDBTVY3WP1K",
+    "AHB3QFZSFN9DL",
+    "ANZKTE853UXSD",
+    "A38HFMRXB5Q13M",
+    "A3527QDVIOHI8E",
+    "AV22FQTJNBUZT",
+    "A7RAVFS10BUZ1"
+  ],
+  "prompt": "Please begin the trial by clicking 'Start'.<br><br>Try to figure out the relationship between the two labeled balls and whether one of them is heavier.<br><br><span style='font-weight:bold';>Remember, this is a video of another player who was able to interact with the balls with their mouse.</span>",
+  "setupNames": [
+    "start_time",
+    "learning",
+    "box2d_ratio",
+    "pixel_ratio",
+    "stage_width",
+    "stage_height",
+    "fullX",
+    "fullY",
+    "CO_damping",
+    "box2d_step_size",
+    "gravity_east",
+    "gravity_south",
+    "local_forces1",
+    "local_forces2",
+    "local_forces3",
+    "local_forces4",
+    "local_forces5",
+    "local_forces6",
+    "o_mass",
+    "o_radius",
+    "o_elasticity",
+    "o_friction",
+    "o_damping",
+    "fist_mass",
+    "fist_elasticity",
+    "fist_friction",
+    "patch_width",
+    "patch_height",
+    "patch_damping",
+    "border_width",
+    "wall_mass",
+    "wall_elasticity",
+    "wall_friction",
+    "wall_damping",
+    "puck_hues1",
+    "puck_hues2",
+    "puck_hues3",
+    "puck_hues4",
+    "zoom_constant"
+  ],
+  "timelineNames": [
+    "frame",
+    "time",
+    "idControlledObject",
+    "mouseX",
+    "mouseY",
+    "object1.x",
+    "object1.y",
+    "object2.x",
+    "object2.y",
+    "object3.x",
+    "object3.y",
+    "object4.x",
+    "object4.y",
+    "fist.x",
+    "fist.y"
+  ],
+  "eventNames": [
+    "frame",
+    "time",
+    "eventCounter",
+    "obj1",
+    "obj2",
+    "object1.x",
+    "object1.y",
+    "object1.vx",
+    "object1.vy",
+    "object2.x",
+    "object2.y",
+    "object2.vx",
+    "object2.vy",
+    "object3.x",
+    "object3.y",
+    "object3.vx",
+    "object3.vy",
+    "object4.x",
+    "object4.y",
+    "object4.vx",
+    "object4.vy",
+    "fist.x",
+    "fist.y",
+    "fist.vx",
+    "fist.vy"
+  ],
+  "questions": [
+    {
+      "q1": "What is the relationship between the balls marked <b>",
+      "q2": "</b> and <b>",
+      "q3": "</b>?",
+      "type": "relationship",
+      "l": [
+        "they attract each other",
+        "none",
+        "they repel each other"
+      ],
+      "v": [
+        "attract",
+        "none",
+        "repel"
+      ]
+    },
+    {
+      "q1": "Is <b>",
+      "q2": "</b> or <b>",
+      "q3": "</b> heavier?",
+      "type": "mass",
+      "l": [
+        " is heavier",
+        "same weight",
+        " is heavier"
+      ],
+      "v": [
+        "A",
+        "same",
+        "B"
+      ]
+    }
+  ],
+  "sliders": [
+    {
+      "q": "How confident are you that you got this question right?",
+      "type": "relationship",
+      "l": [
+        "not at all",
+        "",
+        "very much"
+      ]
+    },
+    {
+      "q": "How confident are you that you got this question right?",
+      "type": "mass",
+      "l": [
+        "not at all",
+        "",
+        "very much"
+      ]
+    }
+  ]
+}

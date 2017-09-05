@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Load packages -->
+	<script src="static/lib/ivank.js"></script>
+	<script src="static/lib/jquery.min.js"></script>
+	<script src="static/lib/color.js"></script>
+	
+	<script>
+		
+	var stage;
+	var actors = []; // instances of Bitmap (from IvanK)
+	var wallActs = [];
+	var wallBods = [];
+	var preGlobalPos = null; //What is this for??
+	var Color = net.brehaut.Color;
+	var zoomConstant = true; //Keeping track of whether the user changes the zoom level
+	var yokerZoom = undefined;
+
+	function Start(yokerZoomIn) {
+
+		initial_pixel_ratio = window.devicePixelRatio;
+		yokerZoom = yokerZoomIn
+	  	console.log('initial_pixel_ratio', initial_pixel_ratio, 'yokerZoom', yokerZoom)
+	  	
+	  	counter = 0;
+
+	  if (stage == undefined) {
+	    stage = new Stage("c");
+	  }
+
+	  if (counter == 0) {
+	    ///////////////////////////////////////////////
+	    //Things that are only added on the first trial
+	    ///////////////////////////////////////////////
+		ratio = 100  * initial_pixel_ratio;
+
+	    fullX = stage.stageWidth / ratio;
+	    fullY = stage.stageHeight / ratio;
+
+	    xPos = ratio * fullX / 2;
+	    yPos = ratio * fullY / 2;
+	    stepSize = 1 / 60; //120;
+
+	    var bd = new BitmapData("static/images/border.png");
+	    var bm = new Bitmap(bd);
+	    bm.x = 0;
+	    bm.y = 0;
+	    curtain = new Sprite();
+	    curtain.addChild(bm);
+	    curtain.scaleX = fullX * window.devicePixelRatio;
+	    curtain.scaleY = fullY * window.devicePixelRatio;
+	  }
+
+		start_time = new Date();
+
+		//Grab data
+		tl_data = parent.tl_data;
+		object_names = ['o1', 'o2','o3','o4'];
+
+		//Walls
+		  //Parameters: (w,      h,          x,         y,        type, density, damping, friction, restitution, userData, isRendered, stage, img)
+	    borderWidth = Math.min(fullY / 20, fullX / 20);
+		console.log('fullX', fullX, 'fullY',fullY);
+
+		//fullX / 2, borderWidth, fullX / 2, 0,
+		tw=createBox(fullX, borderWidth*2, 0, 0, stage, "static/images/border.png");
+		bw=createBox(fullX, borderWidth*2, 0, 0, stage, "static/images/border.png");
+		lw=createBox(borderWidth*2, fullY,     0, 0, stage, "static/images/border.png");
+		rw=createBox(borderWidth*2, fullY, 0, 0, stage, "static/images/border.png");
+
+		  // console.log('topwall', topwall, 'bottomwall', bottomwall);
+
+		//Balls
+		ballWidth = Math.min(fullX / 16, fullY / 16);
+
+		//Create random but equally spaced starting hues
+	    hues = [Math.floor(Math.random() * 360)];
+	    hues.push(hues[0] + 90);
+	    hues.push(hues[0] + 180);
+	    hues.push(hues[0] + 270);
+	    hues = shuffle(hues);
+
+	
+		o1 = createBall(ballWidth, tl_data['o1.x'][0], tl_data['o1.y'][0], stage, "", hues[0], 'A');
+		o2 = createBall(ballWidth, tl_data['o2.x'][0], tl_data['o2.y'][0], stage, "", hues[1], 'B');
+		o3 = createBall(ballWidth, tl_data['o3.x'][0], tl_data['o3.y'][0], stage, "", hues[2], '');
+		o4 = createBall(ballWidth, tl_data['o4.x'][0], tl_data['o4.y'][0], stage, "", hues[3], '');
+
+		var bd = new BitmapData('static/images/black_circle_border.png');
+		bm_ring = new Bitmap(bd);
+		
+		//Resize the image and location depending on the pixel ratio/zoom level
+		bm_ring.scaleX = window.devicePixelRatio/2;
+		bm_ring.scaleY = window.devicePixelRatio/2;
+		bm_ring.x = -(ballWidth*ratio);
+		bm_ring.y = -(ballWidth*ratio);
+
+		cursor = new Sprite();
+	    cursor.graphics.lineStyle(2 * window.devicePixelRatio, 0x000000);
+		cursor.graphics.moveTo(-7.5 * window.devicePixelRatio, 0);
+		cursor.graphics.lineTo(7.5 * window.devicePixelRatio,0);
+	    cursor.graphics.lineStyle(2 * window.devicePixelRatio, 0x000000);
+		cursor.graphics.moveTo(0, -7.5 * window.devicePixelRatio);
+		cursor.graphics.lineTo(0, 7.5 * window.devicePixelRatio);
+
+		stage.addChild(cursor);
+
+		console.log(actors);
+		StartUpdate();
+	}
+
+
+
+////////////////////////////////////////////////
+//Makes a square object in the box2d environment
+////////////////////////////////////////////////
+
+function createBox(w, h, x, y, stage, img) {
+
+		var bd = new BitmapData(img);
+		var bm = new Bitmap(bd);
+		bm.x = -50;
+		bm.y = -50;
+		var actor = new Sprite();
+		actor.addChild(bm);
+		actor.scaleX = w * window.devicePixelRatio;
+		actor.scaleY = h * window.devicePixelRatio;
+		stage.addChild(actor);
+		wallActs.push(actor);
+
+		actor
+	}
+
+
+
+////////////////////////////////////////////////
+//Makes a round object in the box2d environment
+////////////////////////////////////////////////
+function createBall(r, x, y, stage, img, hue, label)
+{
+
+	var actor = new Sprite();
+
+	//Inefficient way to get from HSL colours to javascript (single integer) via RGB.
+	var tmp = Color({
+	  hue: hue,
+	  saturation: .8,
+	  lightness: .7
+	});
+	var tmp2 = hexToRgb(tmp);
+	color = tmp2.r;
+	color = (color << 8) + tmp2.g;
+	color = (color << 8) + tmp2.b;
+
+	actor.graphics.beginFill(color, 1);
+	actor.graphics.drawCircle(0, 0, r * ratio);
+	actor.graphics.endFill();
+
+
+		
+	// var bd = new BitmapData(img);
+	// var bm = new Bitmap(bd);
+	// bm.x = -50;
+	// bm.y = -50;
+	// var actor = new Sprite();
+	// actor.addChild(bm);
+	// actor.scaleX = 2 * r * window.devicePixelRatio;
+	// actor.scaleY = 2 * r * window.devicePixelRatio;
+
+
+	if (label != '') {
+	var f1 = new TextFormat("Helvetica", 25*initial_pixel_ratio, 0x000000, true, false, false);
+	var t1 = new TextField();
+	t1.selectable = false; // default is true
+	t1.setTextFormat(f1);
+	t1.text = label;
+	t1.width = t1.textWidth;
+	t1.height = t1.textHeight;
+	t1.obj_ix = actors.length;
+	actor.addChild(t1);
+	t1.x = -t1.textWidth / 2;
+	t1.y = -t1.textHeight / 2;//-25;
+	}
+
+	//console.log(actor);
+
+	stage.addChild(actor);
+	actor.obj_ix = actors.length;
+	actors.push(actor);
+
+	actor;
+}
+
+
+	//A useful function that replaces 'undefined's when a value is not set in a function, with a default value
+	function defaultFor(arg, val) {
+		return typeof arg !== 'undefined' ? arg : val;
+	}
+
+
+//Update the objects positions etc
+function onEF(e) {
+
+	counter = counter + 1;
+
+	if (counter/500==Math.round(counter/500))
+	{
+		console.log('frame', counter);
+
+	}
+	
+	if (window.devicePixelRatio != initial_pixel_ratio) {
+    	zoomConstant = false;
+  	}
+
+	if (counter==1)
+	{
+		wallActs[0].x=fullX/2*ratio;//p.x * ratio;
+		wallActs[0].y=0;//p.y * ratio;
+
+		wallActs[1].x=fullX/2*ratio//p.x * ratio;
+		wallActs[1].y=fullY*ratio//p.y * ratio;
+
+		wallActs[2].x=0;//p.x * ratio;
+		wallActs[2].y=fullY/2 * ratio;//p.y * ratio;
+
+		wallActs[3].x=fullX*ratio;//p.x * ratio;
+		wallActs[3].y=fullY/2*ratio;//p.y * ratio;
+	}
+
+	cursor.x = tl_data.mouseX[counter]*window.devicePixelRatio/yokerZoom;
+	cursor.y = tl_data.mouseY[counter]*window.devicePixelRatio/yokerZoom;
+
+	
+	for (var i = 0; i < actors.length; i++) {
+		var actor = actors[i];
+		actor.x = tl_data[object_names[i] + '.x'][counter] * ratio; 
+		actor.y = tl_data[object_names[i]+ '.y'][counter] * ratio;
+	}
+
+	if (tl_data.idControlledObject[counter]!=='none' && tl_data.idControlledObject[counter-1]==='none')
+	{
+		
+
+		console.log(counter, 'ballwidth', ballWidth, 'ratio', ratio, tl_data.idControlledObject[counter]);
+
+		if (tl_data.idControlledObject[counter]==='object1') {actors[0].addChild(bm_ring);}
+		if (tl_data.idControlledObject[counter]==='object2') {actors[1].addChild(bm_ring);}
+		if (tl_data.idControlledObject[counter]==='object3') {actors[2].addChild(bm_ring);}
+		if (tl_data.idControlledObject[counter]==='object4') {actors[3].addChild(bm_ring);}
+		//Why not visible??
+
+		console.log('grabbed', tl_data.idControlledObject[counter], ' at ', cursor.x, cursor.y);
+	}
+
+	if (tl_data.idControlledObject[counter]==='none' && tl_data.idControlledObject[counter-1]!=='none')
+	{
+		if (tl_data.idControlledObject[counter-1]==='object1') {actors[0].removeChild(bm_ring);}
+		if (tl_data.idControlledObject[counter-1]==='object2') {actors[1].removeChild(bm_ring);}
+		if (tl_data.idControlledObject[counter-1]==='object3') {actors[2].removeChild(bm_ring);}
+		if (tl_data.idControlledObject[counter-1]==='object4') {actors[3].removeChild(bm_ring);}
+	}
+
+	if (counter >= (tl_data[object_names[0] + '.x'].length - 1)) {
+	//if (counter >= 100) {
+		EndClip();
+	}
+}
+
+
+
+	function EndClip() {
+
+	  StopUpdate();
+	  stage.addChild(curtain);
+
+	  console.log('zoomConstant?', Number(zoomConstant));
+
+	  parent.ReplayFinished();
+	  
+	  stage.removeChild(cursor);
+	  
+	  for (var i = 0; i<wallActs.length; i++){
+	  	var actor = wallActs[i];
+	    stage.removeChild(actor);
+	  }
+
+	  for (var i = 0; i < actors.length; i++) {
+
+	    var actor = actors[i];
+	    stage.removeChild(actor);
+	  }
+
+	  // //stage.removeChild(curtain);
+	  wallActs = [];
+	  wallBods = [];
+	  bodies = []; // clear the body and actor vectors
+	  actors = []; //
+
+	  console.log('End of trial clearing check', actors);
+	}
+
+
+
+	function StartUpdate() {
+		stage.addEventListener(Event.ENTER_FRAME, onEF);
+	}
+
+	function StopUpdate() {
+		//console.log('Removed the onEF listener');
+		stage.removeEventListener(Event.ENTER_FRAME, onEF);
+	}
+
+	function Pause() {
+		StopUpdate();
+
+	}
+
+	function Resume() {
+		StartUpdate();
+	}
+
+	function RemoveCurtain() {
+		if (stage != undefined )
+		{
+			stage.removeChild(curtain);
+		}
+    }
+
+	function hexToRgb(hex) {
+	  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	  return result ? {
+	    r: parseInt(result[1], 16),
+	    g: parseInt(result[2], 16),
+	    b: parseInt(result[3], 16)
+	  } : null;
+	}
+
+	Array.prototype.max = function() {
+	  return Math.max.apply(null, this);
+	};
+
+	function shuffle(array) {
+	  var currentIndex = array.length,
+	    temporaryValue, randomIndex;
+
+	  // While there remain elements to shuffle...
+	  while (0 !== currentIndex) {
+
+	    // Pick a remaining element...
+	    randomIndex = Math.floor(Math.random() * currentIndex);
+	    currentIndex -= 1;
+
+	    // And swap it with the current element.
+	    temporaryValue = array[currentIndex];
+	    array[currentIndex] = array[randomIndex];
+	    array[randomIndex] = temporaryValue;
+	  }
+
+	  return array;
+	}
+
+	</script>
+
+</head>
+
+
+<body>
+	<!-- Canvas is where the stuff gets drawn-->
+	<canvas id="c" onload="removeCursor()"></canvas><!--width="600" height="400"   style="border:1px solid #000000;" -->
+
+
+</body>

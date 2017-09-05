@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Consent Form</title>
+  
+  <script src="static/js/utils.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="static/css/general.css" />
+</head>
+
+<body>
+  <div class="slide">
+    <h1>NYU Computation and Cognition Lab</h1>
+    <div class="blue">
+      <div id="consent">
+        <h1>We need your consent to proceed</h1>
+        <hr />
+        <div class="legal well">
+          <p>
+            You have been invited to take part in a research study named Active Learning. The study is designed to investigate how people learn in dynamic tasks. It will be conducted by Professor Todd M. Gureckis who is the principal investigator, at the Department of Psychology, Faculty of Arts &amp; Science, New York University.
+          </p>
+          <p>
+            If you agree to be in this study, you may be asked to: look at pictures of objects (e.g., geometric figures or everyday objects) presented on a computer display, listen to sounds, or observe lights controlled by the computer and to make judgments about them using a keyboard, mouse, or switch attached to a computer. This study will take around 20 minutes to complete, and you will receive $1.75 for your participation. As an additional incentive to try your best at the task, you will earn a small cash bonus of around $0.75 (max $2.00) based on your performance.
+          </p>
+          <p>
+            When you complete the study, a thorough verbal and written explanation of it will be
+            provided. In addition, by agreeing to participate, you understand you must be 18 years or older to participate.
+          </p>
+          <p>
+            There are no known risks associated with your participation in this research beyond those of everyday life. Although you will receive no direct benefits, this research may help the investigator understand how people learn new categories.
+          </p>
+          <p>
+            Confidentiality of your research records will be strictly maintained. We assign code numbers to each participant so that data is never directly linked to individual identity, and we are interested in group results rather than the responses of particular individuals. Data are kept in out laboratory and are only viewed by the investigators. These data files are kept on our computer indefinitely.
+          </p>
+          <p>
+            Taking part in this study is voluntary. Not taking part or withdrawing after the study has begun will result in no loss of services from NYU to which you are otherwise entitled. You have the right to skip or not answer any questions you prefer not to answer.
+          </p>
+          <p>
+            If there is anything about the study or your participation that is unclear or that you do not understand, if you have questions or wish to report a research-related problem, you may contact the principal investigator, Todd M. Gureckis at 6 Washington Place (409), New York, NY, 10003, (212) 998-3794, todd.gureckis@nyu.edu. For questions about your rights as a research participant, you may contact the University Committee on Activities Involving Human Subjects, New York University, 665 Broadway, Suite 804, New York, NY 10012, at ask.humansubjects@nyu.edu or (212) 998-4808.</p>
+
+            <button type="button" class="btn btn-default btn-sm" onClick="window.print();">
+              <span class="glyphicon glyphicon-print"></span> Print a copy of this
+            </button>   
+          </div>
+          
+          <div class="continue">
+            <h4>Do you understand and consent to these terms?</h4>
+            <button type="button" id="IAgree" onclick="window.location='/exp?hitId={{ hitid }}&assignmentId={{ assignmentid }}&workerId={{ workerid }}'" >I Agree</button>
+            <button type="button" id="NoThanks" onclick="window.close();">No Thanks</button>
+          </div>      
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

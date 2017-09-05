@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Load packages -->
+	<script src="static/lib/Box2dWeb-2.1.a.3.js"></script>
+	<script src="static/lib/ivank.js"></script>
+	<script src="static/lib/jquery.min.js"></script>
+	<script src="static/lib/color.js"></script>
+	
+	<script>
+		
+	var stage;
+	var world;
+	var bodies = []; // instances of b2Body (from Box2D)
+	var actors = []; // instances of Bitmap (from IvanK)
+	var wallActs = [];
+	var wallBods = [];
+	var preGlobalPos = null; //What is this for??
+
+	//Declaring a bunch of needed box2d variables
+	var b2Vec2 = Box2D.Common.Math.b2Vec2,
+		b2BodyDef = Box2D.Dynamics.b2BodyDef,
+		b2Body = Box2D.Dynamics.b2Body,
+		b2FixtureDef = Box2D.Dynamics.b2FixtureDef,
+		b2World = Box2D.Dynamics.b2World,
+		b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
+	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
+	b2GravityController = Box2D.Dynamics.Controllers.b2GravityController;
+	b2TensorDampingController = Box2D.Dynamics.Controllers.b2TensorDampingController;
+	b2ContactListener = Box2D.Dynamics.b2ContactListener;
+
+	
+	var Color = net.brehaut.Color;
+	var zoomConstant = true; //Keeping track of whether the user changes the zoom level
+
+	function Start() {
+		initial_pixel_ratio = window.devicePixelRatio;
+	  	console.log('initial_pixel_ratio', initial_pixel_ratio)
+	  	
+
+	  	counter = 0; //parent.STATE.index;
+
+	  if (stage == undefined) {
+	    stage = new Stage("c");
+	  }
+
+	  if (counter == 0) {
+	    ///////////////////////////////////////////////
+	    //Things that are only added on the first trial
+	    ///////////////////////////////////////////////
+		ratio = 100  * initial_pixel_ratio;
+
+	    fullX = stage.stageWidth / ratio;
+	    fullY = stage.stageHeight / ratio;
+
+	    xPos = ratio * fullX / 2;
+	    yPos = ratio * fullY / 2;
+	    stepSize = 1 / 60; //120;
+
+	    var bd = new BitmapData("static/images/border.png");
+	    var bm = new Bitmap(bd);
+	    bm.x = 0;
+	    bm.y = 0;
+	    curtain = new Sprite();
+	    curtain.addChild(bm);
+	    curtain.scaleX = fullX * window.devicePixelRatio;
+	    curtain.scaleY = fullY * window.devicePixelRatio;
+	  }
+
+		start_time = new Date();
+
+		world = new b2World(); //Necessary?
+
+		//Grab data
+		tl_data = parent.tl_data;
+		object_names = ['o1', 'o2','o3','o4'];
+
+		//var fullX = (stage.stageWidth * window.devicePixelRatio) / ratio; //Check this is working correctly
+		//var fullY = (stage.stageHeight * window.devicePixelRatio)/ ratio;
+
+
+
+		//Walls
+		  //Parameters: (w,      h,          x,         y,        type, density, damping, friction, restitution, userData, isRendered, stage, img)
+		    borderWidth = Math.min(fullY / 20, fullX / 20);
+			console.log('fullX', fullX, 'fullY',fullY);
+			wall_mass=0;
+			wall_damping=0;
+			wall_elasticity=0;
+			wall_friction=0;
+
+		  //fullX / 2, borderWidth, fullX / 2, 0,
+		  tw=createBox(fullX / 2, borderWidth, fullX / 2, 0, b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+		    name: "top_wall",
+		    bodyType: "static",
+		    W: fullX,
+		    H: borderWidth
+		  }, true, stage, "static/images/border.png");
+
+		  bw=createBox(fullX / 2, borderWidth, fullX / 2, fullY, b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+		    name: "bottom_wall",
+		    bodyType: "static",
+		    W: fullX / 2,
+		    H: borderWidth
+		  }, true, stage, "static/images/border.png");
+
+		  lw=createBox(borderWidth, fullY / 2, 0, fullY / 2, b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+		    name: "left_wall",
+		    bodyType: "static",
+		    W: borderWidth,
+		    H: fullY / 2
+		  }, true, stage, "static/images/border.png");
+
+		  rw=createBox(borderWidth, fullY / 2, fullX, fullY / 2, b2Body.b2_staticBody, wall_mass, wall_damping, wall_elasticity, wall_friction, {
+		    name: "right_wall",
+		    bodyType: "static",
+		    W: borderWidth,
+		    H: fullY / 2
+		  }, true, stage, "static/images/border.png");
+
+		  // console.log('topwall', topwall, 'bottomwall', bottomwall);
+
+		//Balls
+		ballWidth = Math.min(fullX / 16, fullY / 16);
+
+		//Create random but equally spaced starting hues
+	    hues = [Math.floor(Math.random() * 360)];
+	    hues.push(hues[0] + 90);
+	    hues.push(hues[0] + 180);
+	    hues.push(hues[0] + 270);
+	    hues = shuffle(hues);
+
+	
+		o1 = createBall(ballWidth, tl_data['o1.x'][0], tl_data['o1.y'][0], b2Body.b2_kinematicBody, 0,0,0,0, {name: "o1",
+		     bodyType: "dynamic",
+		     W: ballWidth,
+		     H: ballWidth }, true, stage, "", hues[0], 'A');
+
+		o2 = createBall(ballWidth, tl_data['o2.x'][0], tl_data['o2.y'][0], b2Body.b2_kinematicBody, 0,0,0,0, {name: "o2",
+		     bodyType: "dynamic",
+		     W: ballWidth,
+		     H: ballWidth }, true, stage, "", hues[1], 'B');
+
+		o3 = createBall(ballWidth, tl_data['o3.x'][0], tl_data['o3.y'][0], b2Body.b2_kinematicBody, 0,0,0,0, {name: "o3",
+		     bodyType: "dynamic",
+		     W: ballWidth,
+		     H: ballWidth }, true, stage, "", hues[2], '');
+
+		o4 = createBall(ballWidth, tl_data['o4.x'][0], tl_data['o4.y'][0], b2Body.b2_kinematicBody, 0,0,0,0, {name: "o4",
+		     bodyType: "dynamic",
+		     W: ballWidth,
+		     H: ballWidth }, true, stage, "", hues[3], '');
+
+		cursor = new Sprite();
+	    cursor.graphics.lineStyle(2 * window.devicePixelRatio, 0x000000);
+		cursor.graphics.moveTo(-7.5 * window.devicePixelRatio, 0);
+		cursor.graphics.lineTo(7.5 * window.devicePixelRatio,0);
+	    cursor.graphics.lineStyle(2 * window.devicePixelRatio, 0x000000);
+		cursor.graphics.moveTo(0, -7.5 * window.devicePixelRatio);
+		cursor.graphics.lineTo(0, 7.5 * window.devicePixelRatio);
+
+		stage.addChild(cursor);
+
+		console.log(actors, bodies);
+		StartUpdate();
+	}
+
+
+
+////////////////////////////////////////////////
+//Makes a square object in the box2d environment
+////////////////////////////////////////////////
+
+function createBox(w, h, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img) {
+
+
+		//console.log(w, h, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img);
+
+		// Create the fixture definition
+		var fixDef = new b2FixtureDef;
+
+		fixDef.density = density; // Set the density
+		fixDef.friction = friction; // Set the friction 
+		fixDef.restitution = restitution; // Set the restitution - elasticity
+
+		// Define the shape of the fixture
+		fixDef.shape = new b2PolygonShape;
+		fixDef.shape.SetAsBox(
+			w // input should be half the width
+			, h // input should be half the height 
+		);
+
+		// Create the body definition
+		var bodyDef = new b2BodyDef;
+		bodyDef.type = type;
+
+		// Set the position of the body
+		bodyDef.position.x = x;
+		bodyDef.position.y = y;
+
+		// Set the damping (This was not working, any idea why not??)
+		//bodyDef.linearDamping = defaultFor(damping, 0.1);
+
+		// Create the body in the box2d world
+		var b = world.CreateBody(bodyDef);
+		b.CreateFixture(fixDef);
+
+		//What is userData exactly, and how do we use it?
+		if (typeof userData !== 'undefined') {
+			b.SetUserData(userData);
+		}
+
+		b.m_linearDamping = damping;
+
+		isRendered = defaultFor(isRendered, false);
+
+		// if (isRendered) {
+		// 	bodies.push(b);
+		// }
+		wallBods.push(b);
+
+		if (typeof img !== 'undefined') {
+			var bd = new BitmapData(img);
+			var bm = new Bitmap(bd);
+			bm.x = -50;
+			bm.y = -50;
+			var actor = new Sprite();
+			actor.addChild(bm);
+			actor.scaleX = 2 * w * window.devicePixelRatio;
+			actor.scaleY = 2 * h * window.devicePixelRatio;
+			stage.addChild(actor);
+			wallActs.push(actor);
+		}
+
+		return b;
+	}
+
+
+
+////////////////////////////////////////////////
+//Makes a round object in the box2d environment
+////////////////////////////////////////////////
+function createBall(r, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img, hue, label) {
+  // Create the fixture definition
+  var fixDef = new b2FixtureDef;
+
+  fixDef.density = density; // Set the density
+  fixDef.friction = friction; // Set the friction
+  fixDef.restitution = restitution; // Set the restitution - bounciness
+
+  // Define the shape of the fixture
+  fixDef.shape = new b2CircleShape;
+  fixDef.shape.SetRadius(r);
+
+  // Create the body definition
+  var bodyDef = new b2BodyDef;
+  bodyDef.type = type;
+
+  // Set the position of the body
+  bodyDef.position.x = x;
+  bodyDef.position.y = y;
+
+  // Create the body in the box2d world
+  var b = world.CreateBody(bodyDef);
+  b.CreateFixture(fixDef);
+
+  // Set the damping  (This was not working, any idea why not??)
+  //bodyDef.linearDamping = defaultFor(damping, 0.1);
+
+  if (typeof userData !== 'undefined') {
+    b.SetUserData(userData);
+  }
+
+  //this workaround seems to do the trick
+  b.m_linearDamping = damping;
+
+  //console.log(img, hue, label);
+
+
+  isRendered = defaultFor(isRendered, false);
+  if (isRendered) {
+    bodies.push(b);
+  }
+
+  var actor = new Sprite();
+
+  if (img == '') {
+    //Inefficient way to get from HSL colours to javascript (single integer) via RGB.
+    var tmp = Color({
+      hue: hue,
+      saturation: .8,
+      lightness: .7
+    });
+    var tmp2 = hexToRgb(tmp);
+    color = tmp2.r;
+    color = (color << 8) + tmp2.g;
+    color = (color << 8) + tmp2.b;
+
+
+    actor.graphics.beginFill(color, 1);
+    actor.graphics.drawCircle(0, 0, r * ratio);
+    actor.graphics.endFill();
+
+  } else {
+  	
+    var bd = new BitmapData(img);
+    var bm = new Bitmap(bd);
+    bm.x = -50;
+    bm.y = -50;
+    var actor = new Sprite();
+    actor.addChild(bm);
+    actor.scaleX = 2 * r * window.devicePixelRatio;
+    actor.scaleY = 2 * r * window.devicePixelRatio;
+
+  }
+
+  if (label != '') {
+    var f1 = new TextFormat("Helvetica", 25*initial_pixel_ratio, 0x000000, true, false, false);
+    var t1 = new TextField();
+    t1.selectable = false; // default is true
+    t1.setTextFormat(f1);
+    t1.text = label;
+    t1.width = t1.textWidth;
+    t1.height = t1.textHeight;
+    t1.obj_ix = actors.length;
+    actor.addChild(t1);
+    t1.x = -t1.textWidth / 2;
+    t1.y = -t1.textHeight / 2;//-25;
+  }
+
+  //console.log(actor);
+
+  stage.addChild(actor);
+  actor.obj_ix = actors.length;
+  actors.push(actor);
+
+  return b;
+}
+
+
+	//A useful function that replaces 'undefined's when a value is not set in a function, with a default value
+	function defaultFor(arg, val) {
+		return typeof arg !== 'undefined' ? arg : val;
+	}
+
+
+//Update the objects positions etc
+function onEF(e) {
+
+	world.Step(1 / 120, 3, 3);
+	world.ClearForces();
+	counter = counter + 1;
+
+	if (counter/500==Math.round(counter/500))
+	{
+		console.log('frame', counter);
+
+	}
+	
+	if (window.devicePixelRatio != initial_pixel_ratio) {
+    	zoomConstant = false;
+  	}
+
+	if (counter==1)
+	{
+		tw.SetPosition(new b2Vec2(fullX/2, 0));
+		var p = tw.GetPosition();
+		wallActs[0].x=p.x * ratio;
+		wallActs[0].y=p.y * ratio;
+		//console.log('tw', p.x, p.y, wallActs[0].x, wallActs[0].y);
+
+		bw.SetPosition(new b2Vec2(fullX/2, fullY));
+		p = bw.GetPosition();
+		wallActs[1].x=p.x * ratio;
+		wallActs[1].y=p.y * ratio;
+		//console.log('bw', wallActs[1].x, wallActs[1].y, p.x, p.y);
+
+		lw.SetPosition(new b2Vec2(0, fullY/2));
+		p = lw.GetPosition();
+		wallActs[2].x=p.x * ratio;
+		wallActs[2].y=p.y * ratio;
+		//console.log('lw', wallActs[2].x, wallActs[2].y, p.x, p.y);
+
+		rw.SetPosition(new b2Vec2(fullX, fullY/2));
+		p = rw.GetPosition();
+		wallActs[3].x=p.x * ratio;
+		wallActs[3].y=p.y * ratio;
+		//console.log('rw', wallActs[3].x, wallActs[3].y, p.x, p.y);
+	}
+
+	
+	cursor.x = tl_data.mouseX[counter]*window.devicePixelRatio;
+	cursor.y = tl_data.mouseY[counter]*window.devicePixelRatio;
+
+	
+	for (var i = 0; i < actors.length; i++) {
+
+		var body = bodies[i];
+		var actor = actors[i];
+		body.SetPosition(new b2Vec2(tl_data[object_names[i] + '.x'][counter], tl_data[object_names[i]+ '.y'][counter]));
+		p = body.GetPosition();
+
+		actor.x = p.x * ratio; // updating actor (100 is the pixals to meters ratio)
+		actor.y = p.y * ratio;
+		actor.rotation = 0;
+
+		//console.log('obj', object_names[i], tl_data[object_names[i][0]][counter], tl_data[object_names[i][1]][counter], p.x * ratio, p.y * ratio);
+
+	}
+
+	if (tl_data.idControlledObject[counter]!='none' && tl_data.idControlledObject[counter-1]=='none')
+	{
+		var bd = new BitmapData('static/images/black_circle_border.png');
+		bm = new Bitmap(bd);
+		//Resize the image and location depending on the pixel ratio/zoom level
+		bm.scaleX = window.devicePixelRatio/2;
+		bm.scaleY = window.devicePixelRatio/2;
+		bm.x = -bodies[0].m_userData.W * ratio;
+		bm.y = -bodies[0].m_userData.W * ratio;
+		console.log('bm', bm)
+		if (tl_data.idControlledObject[counter]=='o1') {actors[0].addChild(bm)};
+		if (tl_data.idControlledObject[counter]=='o2') {actors[1].addChild(bm)};
+		if (tl_data.idControlledObject[counter]=='o3') {actors[2].addChild(bm)};
+		if (tl_data.idControlledObject[counter]=='o4') {actors[3].addChild(bm)};
+
+		console.log('grabbed', tl_data.idControlledObject[counter], ' at ', cursor.x, cursor.y);
+	}
+
+	if (tl_data.idControlledObject[counter]=='none' && tl_data.idControlledObject[counter-1]!='none')
+	{
+		// if (tl_data.idControlledObject[counter-1]=='o1') {actors[0].removeChild(bm)};
+		// if (tl_data.idControlledObject[counter-1]=='o2') {actors[1].removeChild(bm)};
+		// if (tl_data.idControlledObject[counter-1]=='o3') {actors[2].removeChild(bm)};
+		// if (tl_data.idControlledObject[counter-1]=='o4') {actors[3].removeChild(bm)};
+	}
+
+	if (counter >= (tl_data[object_names[0] + '.x'].length - 1)) {
+		EndClip();
+	}
+}
+
+
+
+	function EndClip() {
+
+	  StopUpdate();
+	  stage.addChild(curtain);
+
+	  console.log('zoomConstant?', Number(zoomConstant));
+
+	  parent.ReplayFinished();
+	  
+	  stage.removeChild(cursor);
+	  
+	  for (var i = 0; i<wallActs.length; i++){
+	  	var actor = wallActs[i];
+	    var body = wallBods[i];
+	    stage.removeChild(actor);
+	    world.DestroyBody(body);
+	  }
+
+	  for (var i = 0; i < actors.length; i++) {
+
+	    var actor = actors[i];
+	    var body = bodies[i];
+	    stage.removeChild(actor);
+	    world.DestroyBody(body);
+	  }
+
+	  // //stage.removeChild(curtain);
+	  wallActs = [];
+	  wallBods = [];
+	  bodies = []; // clear the body and actor vectors
+	  actors = []; //
+
+	  console.log('End of trial clearing check', actors, bodies);
+	}
+
+
+
+	function StartUpdate() {
+		stage.addEventListener(Event.ENTER_FRAME, onEF);
+	}
+
+	function StopUpdate() {
+		//console.log('Removed the onEF listener');
+		stage.removeEventListener(Event.ENTER_FRAME, onEF);
+	}
+
+	function Pause() {
+		StopUpdate();
+
+	}
+
+	function Resume() {
+		StartUpdate();
+	}
+
+	function RemoveCurtain() {
+		if (stage != undefined )
+		{
+			stage.removeChild(curtain);
+		}
+    }
+
+	function hexToRgb(hex) {
+	  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	  return result ? {
+	    r: parseInt(result[1], 16),
+	    g: parseInt(result[2], 16),
+	    b: parseInt(result[3], 16)
+	  } : null;
+	}
+
+	Array.prototype.max = function() {
+	  return Math.max.apply(null, this);
+	};
+
+	function shuffle(array) {
+	  var currentIndex = array.length,
+	    temporaryValue, randomIndex;
+
+	  // While there remain elements to shuffle...
+	  while (0 !== currentIndex) {
+
+	    // Pick a remaining element...
+	    randomIndex = Math.floor(Math.random() * currentIndex);
+	    currentIndex -= 1;
+
+	    // And swap it with the current element.
+	    temporaryValue = array[currentIndex];
+	    array[currentIndex] = array[randomIndex];
+	    array[randomIndex] = temporaryValue;
+	  }
+
+	  return array;
+	}
+
+	</script>
+
+</head>
+
+
+<body>
+	<!-- Canvas is where the stuff gets drawn-->
+	<canvas id="c" onload="removeCursor()"></canvas><!--width="600" height="400"   style="border:1px solid #000000;" -->
+
+
+</body>

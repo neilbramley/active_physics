@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Load packages -->
+	<script src="static/lib/Box2dWeb-2.1.a.3.js"></script>
+  	<script src="static/lib/ivank.js"></script>
+  	<script src="static/lib/jquery.min.js" type="text/javascript"></script>
+	
+	<script>
+		
+		var stage;
+		var world;
+		var bodies = [];  // instances of b2Body (from Box2D)
+		var actors = [];  // instances of Bitmap (from IvanK)
+
+		var preGlobalPos = null; //What is this for??
+
+	    //Declaring a bunch of needed box2d variables
+	    var b2Vec2    = Box2D.Common.Math.b2Vec2,
+	    b2BodyDef = Box2D.Dynamics.b2BodyDef,
+	    b2Body    = Box2D.Dynamics.b2Body,
+	    b2FixtureDef  = Box2D.Dynamics.b2FixtureDef,
+	    b2World   = Box2D.Dynamics.b2World,
+	    b2PolygonShape  = Box2D.Collision.Shapes.b2PolygonShape;
+	    b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
+	    b2GravityController = Box2D.Dynamics.Controllers.b2GravityController;
+	    b2TensorDampingController = Box2D.Dynamics.Controllers.b2TensorDampingController;
+	    b2ContactListener = Box2D.Dynamics.b2ContactListener;
+	    
+	    function Start()
+	    {
+
+	    	if (stage == undefined )
+			{
+			stage = new Stage("c");
+
+			} else {
+
+	        for (var i=0; i<actors.length; i++)
+	        {
+	          //console.log('test', i, actors[i]);
+	          var actor=actors[i];
+	          stage.removeChild(actor);
+	        }
+
+	        bodies = [];  // clear the body and actor vectors
+	        actors = [];  //
+	      }
+
+			start_time = new Date();
+
+			world = new b2World(); //Necessary?
+
+			//Grab data
+			tl_data = parent.tl_data;
+			object_names = parent.object_names;
+			console.log(tl_data, object_names);
+
+			
+			pixelratio = window.devicePixelRatio
+			// pixelratio = 1/(1.5);
+			ratio = 100*pixelratio;
+			console.log('window.devicePixelRatio', window.devicePixelRatio);
+
+			var fullX = (stage.stageWidth * window.devicePixelRatio) / ratio; //Check this is working correctly
+      			var fullY = (stage.stageHeight * window.devicePixelRatio)/ ratio;
+
+
+			counter = 0;
+			
+			//Patch
+	    	createBox(tl_data[object_names[0]].w[0], tl_data[object_names[0]].h[0], tl_data[object_names[0]].x[0], tl_data[object_names[0]].y[0], b2Body.b2_kinematicBody,
+	    	 0, 0, 0, 0, 0, true, stage, "static/images/blue_square.png");
+	    	//Walls
+	      	createBox(tl_data[object_names[1]].w[0], tl_data[object_names[1]].h[0], tl_data[object_names[1]].x[0], tl_data[object_names[1]].y[0], b2Body.b2_kinematicBody,
+	      	 0, 0, 0, 0, 0,  true, stage, "static/images/border.png");
+			createBox(tl_data[object_names[2]].w[0], tl_data[object_names[2]].h[0], tl_data[object_names[2]].x[0], tl_data[object_names[2]].y[0], b2Body.b2_kinematicBody,
+			 0, 0, 0, 0, 0,  true, stage, "static/images/border.png");
+			createBox(tl_data[object_names[3]].w[0], tl_data[object_names[3]].h[0], tl_data[object_names[3]].x[0], tl_data[object_names[3]].y[0], b2Body.b2_kinematicBody,
+			 0, 0, 0, 0, 0,  true, stage, "static/images/border.png");
+			createBox(tl_data[object_names[4]].w[0], tl_data[object_names[4]].h[0], tl_data[object_names[4]].x[0], tl_data[object_names[4]].y[0], b2Body.b2_kinematicBody,
+			 0, 0, 0, 0, 0,  true, stage, "static/images/border.png");    		
+			
+			//Fist
+			// console.log(tl_data[object_names[5]].w[0], tl_data[object_names[5]].x[0], tl_data[object_names[5]].y[0])
+			createBall(tl_data[object_names[5]].w[0], tl_data[object_names[5]].x[0], tl_data[object_names[5]].y[0], b2Body.b2_staticBody,
+			 0, 0, 0, 0, 0, true, stage,"static/images/punch.png");
+			//Balls
+			createBall(tl_data[object_names[6]].w[0], tl_data[object_names[6]].x[0], tl_data[object_names[6]].y[0], b2Body.b2_kinematicBody, 0, 0, 0, 0, 0, 
+				true, stage, "static/images/yellow_circle.png");
+			createBall(tl_data[object_names[7]].w[0], tl_data[object_names[7]].x[0], tl_data[object_names[7]].y[0], b2Body.b2_kinematicBody, 0, 0, 0, 0, 0, 
+				true, stage, "static/images/yellow_circle.png");
+     		createBall(tl_data[object_names[8]].w[0], tl_data[object_names[8]].x[0], tl_data[object_names[8]].y[0], b2Body.b2_kinematicBody, 0, 0, 0, 0, 0, 
+     			true, stage, "static/images/red_circle.png");
+     		createBall(tl_data[object_names[9]].w[0], tl_data[object_names[9]].x[0], tl_data[object_names[9]].y[0], b2Body.b2_kinematicBody, 0, 0, 0, 0, 0, 
+     			true, stage, "static/images/red_circle.png");
+			//Dividers
+			createBox(tl_data[object_names[10]].w[0]/ratio, tl_data[object_names[10]].h[0]/ratio,tl_data[object_names[10]].x[0]/ratio, tl_data[object_names[10]].y[0]/ratio,
+            b2Body.b2_kinematicBody, 0, 0, 0, 0, 0,  true, stage, "static/images/border.png");
+      		createBox(tl_data[object_names[11]].w[0]/ratio, tl_data[object_names[11]].h[0]/ratio, tl_data[object_names[11]].x[0]/ratio, tl_data[object_names[11]].y[0]/ratio,
+            b2Body.b2_kinematicBody, 0, 0, 0, 0, 0,  true, stage, "static/images/border.png");
+      		
+      		// Cusps
+      		createBox(tl_data[object_names[12]].w[0]/ratio, tl_data[object_names[12]].h[0]/ratio,tl_data[object_names[12]].x[0]/ratio, tl_data[object_names[12]].y[0]/ratio,
+            b2Body.b2_kinematicBody, 0, 0, 0, 0, 0,   true, stage, "static/images/border.png");
+      		createBox(tl_data[object_names[13]].w[0]/ratio, tl_data[object_names[13]].h[0]/ratio, tl_data[object_names[13]].x[0]/ratio, tl_data[object_names[13]].y[0]/ratio,
+            b2Body.b2_kinematicBody, 0, 0, 0, 0, 0,   true, stage, "static/images/border.png");
+			
+			// Dividers
+			createBox(tl_data[object_names[14]].w[0]/ratio, tl_data[object_names[14]].h[0]/ratio, tl_data[object_names[14]].x[0]/ratio, tl_data[object_names[14]].y[0]/ratio,
+            b2Body.b2_kinematicBody, 0, 0, 0, 0, 0,  true, stage, "static/images/border.png");
+      		createBox(tl_data[object_names[15]].w[0]/ratio, tl_data[object_names[15]].h[0]/ratio, tl_data[object_names[15]].x[0]/ratio, tl_data[object_names[15]].y[0]/ratio,
+            b2Body.b2_kinematicBody, 0, 0, 0, 0, 0,   true, stage, "static/images/border.png");
+      		// Cusps
+      		createBox(tl_data[object_names[16]].w[0]/ratio, tl_data[object_names[16]].h[0]/ratio, tl_data[object_names[16]].x[0]/ratio, tl_data[object_names[16]].y[0]/ratio,
+            b2Body.b2_kinematicBody, 0, 0, 0, 0, 0,   true, stage, "static/images/border.png");
+      		createBox(tl_data[object_names[17]].w[0]/ratio, tl_data[object_names[17]].h[0]/ratio, tl_data[object_names[17]].x[0]/ratio, tl_data[object_names[17]].y[0]/ratio,
+            b2Body.b2_kinematicBody, 0, 0, 0, 0, 0,  true, stage, "static/images/border.png");
+
+
+
+			StartUpdate();
+		}
+
+
+
+		function createBox(w, h, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img){
+
+
+			// console.log(w, h, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img);
+
+			// Create the fixture definition
+			var fixDef = new b2FixtureDef;
+
+			fixDef.density = density;	// Set the density
+			fixDef.friction = friction;	// Set the friction 
+			fixDef.restitution = restitution;	// Set the restitution - elasticity
+
+			// Define the shape of the fixture
+			fixDef.shape = new b2PolygonShape;
+			fixDef.shape.SetAsBox(
+			                    w // input should be half the width
+			                    , h // input should be half the height 
+			                    );
+
+			// Create the body definition
+			var bodyDef = new b2BodyDef;
+			bodyDef.type = type;
+
+			// Set the position of the body
+			bodyDef.position.x = x;
+			bodyDef.position.y = y;
+
+			// Set the damping (This was not working, any idea why not??)
+			//bodyDef.linearDamping = defaultFor(damping, 0.1);
+
+			// Create the body in the box2d world
+			var b = world.CreateBody(bodyDef);
+			b.CreateFixture(fixDef);
+
+			//What is userData exactly, and how do we use it?
+			if (typeof userData !== 'undefined') {
+			b.SetUserData(userData);
+			}
+
+			b.m_linearDamping = damping;
+
+			isRendered = defaultFor(isRendered, false);
+
+			if (isRendered) {
+			bodies.push(b);
+			}
+
+			if (typeof img !== 'undefined') {
+			var bd = new BitmapData(img);
+			var bm = new Bitmap(bd);  bm.x = -50; bm.y = -50;
+			var actor = new Sprite(); actor.addChild(bm);
+			actor.scaleX = 2*w*pixelratio; actor.scaleY = 2*h*pixelratio;
+			stage.addChild(actor);
+			actors.push(actor);
+			}
+
+			return b;
+		}
+
+
+
+	    ////////////////////////////////////////////////
+	    //Makes a round object in the box2d environment
+	    ////////////////////////////////////////////////
+	    function createBall(r, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img){
+
+	    	// console.log(r, x, y, type, density, damping, friction, restitution, userData, isRendered, stage, img);
+
+			// Create the fixture definition
+			var fixDef = new b2FixtureDef;
+
+			fixDef.density = density;	// Set the density
+			fixDef.friction = friction;	// Set the friction
+			fixDef.restitution = restitution;	// Set the restitution - bounciness
+
+			// Define the shape of the fixture
+			fixDef.shape = new b2CircleShape;
+			fixDef.shape.SetRadius(r);
+
+			// Create the body definition
+			var bodyDef = new b2BodyDef;
+			bodyDef.type = type;
+
+			// Set the position of the body
+			bodyDef.position.x = x;
+			bodyDef.position.y = y;
+
+			// Create the body in the box2d world
+			var b = world.CreateBody(bodyDef);
+			b.CreateFixture(fixDef);
+
+			// Set the damping  (This was not working, any idea why not??)
+			//bodyDef.linearDamping = defaultFor(damping, 0.1);
+
+			if (typeof userData !== 'undefined') {
+			b.SetUserData(userData);
+			}
+
+			//his workaround seems to do the trick
+			b.m_linearDamping = damping;
+
+			//console.log('create_ball_check', b)
+
+			isRendered = defaultFor(isRendered, false);
+			if (isRendered) {
+			bodies.push(b);
+			}
+			if (typeof img !== 'undefined') {
+			var bd = new BitmapData(img);
+			var bm = new Bitmap(bd);  bm.x = -50; bm.y = -50;
+			var actor = new Sprite(); actor.addChild(bm);
+			actor.scaleX = 2*r*pixelratio; actor.scaleY = 2*r*pixelratio;
+			stage.addChild(actor);
+			actors.push(actor);
+			}
+
+			return b;
+	    }
+
+
+		//A useful function that replaces 'undefined's when a value is not set in a function, with a default value
+		function defaultFor(arg, val) {
+		return typeof arg !== 'undefined' ? arg:val;
+		}
+
+		
+		//Update the objects positions etc
+		function onEF()
+		{
+
+			world.Step(1 / 120,  3,  3);
+	 		world.ClearForces();
+	 		counter = counter + 1;
+
+	 		// console.log(counter);
+
+			for (var i=0; i<actors.length; i++)
+	    	{
+
+				var body  = bodies[i];
+				var actor = actors [i];
+				body.SetPosition(new b2Vec2(tl_data[object_names[i]].x[counter], tl_data[object_names[i]].y[counter]));
+				var p = body.GetPosition();
+
+				actor.x = p.x * ratio;	// updating actor (100 is the pixals to meters ratio)
+				actor.y = p.y * ratio;
+				actor.rotation = 0;
+
+				// console.log('obj', object_names[i], tl_data[object_names[i]].x[counter], tl_data[object_names[i]].y[counter], p.x, p.y)			
+			}		
+			if (counter >=  (tl_data[object_names[0]].x.length-1))
+			{
+				StopUpdate();	
+			}
+		}
+
+
+		function StartUpdate() {
+		  stage.addEventListener(Event.ENTER_FRAME, onEF);
+		  //stage.addEventListener(MouseEvent.MOUSE_MOVE, Follow);
+		}
+
+		function StopUpdate() {
+		  stage.removeEventListener(Event.ENTER_FRAME, onEF);
+		  //stage.removeEventListener(MouseEvent.MOUSE_MOVE, Follow);
+		  var end_time = new Date();
+      	  	  end_time.getTime()
+      	  	  parent.clipFinished = true;
+		  // console.log('Clip length:', (end_time.getTime()-start_time.getTime())/1000, ' seconds')
+		}
+
+		function Pause() {
+		  StopUpdate();
+		  
+		}
+
+		function Resume() {
+		  StartUpdate();
+		}
+
+	</script>
+
+</head>
+
+
+<body>
+	<canvas id="c" onload="removeCursor()"></canvas>
+</body>

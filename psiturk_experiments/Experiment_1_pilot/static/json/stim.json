@@ -1,0 +1,576 @@
+{
+  "stim1": [
+    {
+      "ID": 1,
+      "world": [
+        3,
+        3,
+        3,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ID": 2,
+      "world": [
+        3,
+        3,
+        0,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "ID": 3,
+      "world": [
+        3,
+        3,
+        -3,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "ID": 4,
+      "world": [
+        3,
+        0,
+        3,
+        1,
+        6,
+        0
+      ]
+    },
+    {
+      "ID": 5,
+      "world": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ID": 6,
+      "world": [
+        3,
+        0,
+        -3,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "ID": 7,
+      "world": [
+        3,
+        -3,
+        3,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "ID": 8,
+      "world": [
+        3,
+        -3,
+        0,
+        1,
+        6,
+        0
+      ]
+    },
+    {
+      "ID": 9,
+      "world": [
+        3,
+        -3,
+        -3,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ID": 10,
+      "world": [
+        0,
+        0,
+        3,
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "ID": 11,
+      "world": [
+        0,
+        0,
+        0,
+        0,
+        4,
+        1
+      ]
+    },
+    {
+      "ID": 12,
+      "world": [
+        0,
+        0,
+        -3,
+        1,
+        6,
+        1
+      ]
+    },
+    {
+      "ID": 13,
+      "world": [
+        0,
+        -3,
+        3,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "ID": 14,
+      "world": [
+        0,
+        -3,
+        0,
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "ID": 15,
+      "world": [
+        0,
+        -3,
+        -3,
+        0,
+        4,
+        1
+      ]
+    },
+    {
+      "ID": 16,
+      "world": [
+        -3,
+        -3,
+        3,
+        1,
+        6,
+        1
+      ]
+    },
+    {
+      "ID": 17,
+      "world": [
+        -3,
+        -3,
+        0,
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "ID": 18,
+      "world": [
+        -3,
+        -3,
+        -3,
+        1,
+        6,
+        1
+      ]
+    }
+  ],
+  "stim2": [
+    {
+      "ID": 1,
+      "world": [
+        3,
+        3,
+        3,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "ID": 2,
+      "world": [
+        3,
+        3,
+        0,
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "ID": 3,
+      "world": [
+        3,
+        3,
+        -3,
+        0,
+        4,
+        1
+      ]
+    },
+    {
+      "ID": 4,
+      "world": [
+        3,
+        0,
+        3,
+        1,
+        6,
+        1
+      ]
+    },
+    {
+      "ID": 5,
+      "world": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "ID": 6,
+      "world": [
+        3,
+        0,
+        -3,
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "ID": 7,
+      "world": [
+        3,
+        -3,
+        3,
+        0,
+        4,
+        1
+      ]
+    },
+    {
+      "ID": 8,
+      "world": [
+        3,
+        -3,
+        0,
+        1,
+        6,
+        1
+      ]
+    },
+    {
+      "ID": 9,
+      "world": [
+        3,
+        -3,
+        -3,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "ID": 10,
+      "world": [
+        0,
+        0,
+        3,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "ID": 11,
+      "world": [
+        0,
+        0,
+        0,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "ID": 12,
+      "world": [
+        0,
+        0,
+        -3,
+        1,
+        6,
+        0
+      ]
+    },
+    {
+      "ID": 13,
+      "world": [
+        0,
+        -3,
+        3,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ID": 14,
+      "world": [
+        0,
+        -3,
+        0,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "ID": 15,
+      "world": [
+        0,
+        -3,
+        -3,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "ID": 16,
+      "world": [
+        -3,
+        -3,
+        3,
+        1,
+        6,
+        0
+      ]
+    },
+    {
+      "ID": 17,
+      "world": [
+        -3,
+        -3,
+        0,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "ID": 18,
+      "world": [
+        -3,
+        -3,
+        -3,
+        1,
+        6,
+        0
+      ]
+    }
+  ],
+
+  "prompt": "Please begin the trial by clicking 'Start'. After the world has stopped, please answer all the questions below.",
+  "promptCondition": [
+  [""],
+    [
+      "<span style='font-weight:bold';>Remember</span> that you can use the mouse to move the fist."
+    ],
+    [
+      "<span style='font-weight:bold';>Remember</span> that you can use the mouse to pick up balls and drag them around."
+    ]
+  ],
+  "setupNames": [
+    "start_time",
+    "learning_condition",
+    "box2d_ratio",
+    "pixel_ratio",
+    "stage_width",
+    "stage_height",
+    "fullX",
+    "fullY",
+    "wall_setup",
+    "wall_mass",
+    "wall_elasticity",
+    "wall_friction",
+    "wall_damping",
+    "CO_damping",
+    "box2d_step_size",
+    "gravity_east",
+    "gravity_south",
+    "local_forces_yy",
+    "local_forces_rr",
+    "local_forces_yr",
+    "y_c_mass",
+    "y_c_radius",
+    "y_c_elasticity",
+    "y_c_friction",
+    "y_c_damping",
+    "r_c_mass",
+    "r_c_radius",
+    "r_c_elasticity",
+    "r_c_friction",
+    "r_c_damping",
+    "fist_mass",
+    "fist_elasticity",
+    "fist_friction",
+    "patch_width",
+    "patch_height",
+    "patch_damping",
+    "border_width"
+  ],
+  "timelineNames": [
+    "frame",
+    "time",
+    "idControlledObject",
+    "mouseX",
+    "mouseY",
+    "yellow_circle1.x",
+    "yellow_circle1.y",
+    "yellow_circle1.vx",
+    "yellow_circle1.vy",
+    "yellow_circle2.x",
+    "yellow_circle2.y",
+    "yellow_circle2.vx",
+    "yellow_circle2.vy",
+    "red_circle1.x",
+    "red_circle1.y",
+    "red_circle1.vx",
+    "red_circle1.vy",
+    "red_circle2.x",
+    "red_circle2.y",
+    "red_circle2.vx",
+    "red_circle2.vy",
+    "fist.x",
+    "fist.y",
+    "fist.vx",
+    "fist.vy"
+  ],
+  "eventNames": [
+    "frame",
+    "time",
+    "eventCounter",
+    "obj1",
+    "obj2",
+    "yellow_circle1.x",
+    "yellow_circle1.y",
+    "yellow_circle1.vx",
+    "yellow_circle1.vy",
+    "yellow_circle2.x",
+    "yellow_circle2.y",
+    "yellow_circle2.vx",
+    "yellow_circle2.vy",
+    "red_circle1.x",
+    "red_circle1.y",
+    "red_circle1.vx",
+    "red_circle1.vy",
+    "red_circle2.x",
+    "red_circle2.y",
+    "red_circle2.vx",
+    "red_circle2.vy",
+    "fist.x",
+    "fist.y",
+    "fist.vx",
+    "fist.vy"
+  ],
+  "questions": [
+    {
+      "q": "In which direction was the <b>global force</b>?",
+      "type": "global_force",
+      "l": [
+        "none",
+        "north &uarr;",
+        "east &rarr;",
+        "south &darr;",
+        "west &larr;",
+        "don't know"
+      ],
+      "v":[
+        "none",
+        "north",
+        "east",
+        "south",
+        "west",
+        "dunno"
+      ]
+    },
+    {
+      "q": "What was the relationship between the <span style='font-weight:bold;color:#FFCC33' >yellow balls</span>?",
+      "type": "yyrelationship",
+      "l": [
+        "none",
+        "they attracted each other",
+        "they repelled each other",
+        "don't know"
+      ],
+      "v": [
+      "none",
+      "attract",
+      "repel",
+      "dunno"
+      ]
+    },
+    {
+      "q": "What was the relationship between the <span style='font-weight:bold;color:#FF3333' >red balls</span>?",
+      "type": "rrrelationship",
+      "l": [
+        "none",
+        "they attracted each other",
+        "they repelled each other",
+        "don't know"
+      ],
+      "v": [
+      "none",
+      "attract",
+      "repel",
+      "dunno"
+      ]
+    },
+    {
+      "q": "What was the relationship between the <span style='font-weight:bold;color:#FFCC33' >yellow balls</span> and the <span style='font-weight:bold;color:#FF3333' >red balls</span>?",
+      "type": "yrrelationship",
+      "l": [
+        "none",
+        "they attracted each other",
+        "they repelled each other",
+        "don't know"
+      ],
+      "v": [
+      "none",
+      "attract",
+      "repel",
+      "dunno"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "stim": [
+    {
+      "ID": 1,
+      "world": [
+        3,
+        1,
+        1
+      ]
+    },
+    {
+      "ID": 2,
+      "world": [
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "ID": 3,
+      "world": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "ID": 4,
+      "world": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "ID": 5,
+      "world": [
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "ID": 6,
+      "world": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "ID": 7,
+      "world": [
+        -3,
+        1,
+        1
+      ]
+    },
+    {
+      "ID": 8,
+      "world": [
+        -3,
+        2,
+        1
+      ]
+    },
+    {
+      "ID": 9,
+      "world": [
+        -3,
+        1,
+        2
+      ]
+    }
+  ],
+
+  "prompt": "Please begin the trial by clicking 'Start'.<br><br>Try to figure out the relationship between the two labeled balls and whether one of them is heavier.<br><br>",
+  "promptCondition": [
+  [""],
+    [
+      "<span style='font-weight:bold';>Remember that you can use the mouse to pick up balls and drag them around.</span>"
+    ]
+  ],
+  "setupNames": [
+  "start_time",
+  "learning",
+  "box2d_ratio",
+  "pixel_ratio",
+  "stage_width",
+  "stage_height",
+  "fullX",
+  "fullY",
+  "CO_damping",
+  "box2d_step_size",
+  "gravity_east",
+  "gravity_south",
+  "local_forces1",
+  "local_forces2",
+  "local_forces3",
+  "local_forces4",
+  "local_forces5",
+  "local_forces6",
+  "o_mass",
+  "o_radius",
+  "o_elasticity",
+  "o_friction",
+  "o_damping",
+  "fist_mass",
+  "fist_elasticity",
+  "fist_friction",
+  "patch_width",
+  "patch_height",
+  "patch_damping",
+  "border_width",
+  "wall_mass",
+  "wall_elasticity",
+  "wall_friction",
+  "wall_damping",
+  "puck_hues1",
+  "puck_hues2",
+  "puck_hues3",
+  "puck_hues4",
+  "zoom_constant"
+  ],
+  "timelineNames": [
+    "frame",
+    "time",
+    "idControlledObject",
+    "mouseX",
+    "mouseY",
+    "object1.x",
+    "object1.y",
+    "object2.x",
+    "object2.y",
+    "object3.x",
+    "object3.y",
+    "object4.x",
+    "object4.y",
+    "fist.x",
+    "fist.y"
+  ],
+  "eventNames": [
+    "frame",
+    "time",
+    "eventCounter",
+    "obj1",
+    "obj2",
+    "object1.x",
+    "object1.y",
+    "object1.vx",
+    "object1.vy",
+    "object2.x",
+    "object2.y",
+    "object2.vx",
+    "object2.vy",
+    "object3.x",
+    "object3.y",
+    "object3.vx",
+    "object3.vy",
+    "object4.x",
+    "object4.y",
+    "object4.vx",
+    "object4.vy",
+    "fist.x",
+    "fist.y",
+    "fist.vx",
+    "fist.vy"
+  ],
+  "questions": [
+    {
+      "q1": "What is the relationship between the balls marked <b>",
+      "q2": "</b> and <b>",
+      "q3": "</b>?",
+      "type": "relationship",
+      "l": [
+        "they attract each other",
+         "none",
+        "they repel each other"
+      ],
+      "v": [   
+      "attract",
+      "none",
+      "repel"
+      ]
+    },
+    {
+      "q1": "Is <b>",
+      "q2": "</b> or <b>",
+      "q3": "</b> heavier?",
+      "type": "mass",
+      "l": [
+        " is heavier",
+        "same weight",
+        " is heavier"
+      ],
+      "v": [
+      "A",
+      "same",
+      "B"
+      ]
+    }
+  ],
+  "sliders": [
+    {"q": "How confident are you that you got this question right?", "type": "relationship", "l": ["not at all", "", "very much"]},
+    {"q": "How confident are you that you got this question right?", "type": "mass", "l": ["not at all", "", "very much"]}
+  ]
+}
