@@ -18,7 +18,7 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 
 [Behavioural data](coming soon)
 
-[Full physics data](coming soon)
+[Full physics data](https://www.openicpsr.org/openicpsr/project/100799/version/V1/view/)
 
 ### Strategy coding
 
