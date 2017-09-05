@@ -2,89 +2,51 @@
 
 Online materials for active physics learning project conducted at UCL, NYU and MIT.
 
-### Strategies
+### Experiments
 
-[The plan -- google doc](https://docs.google.com/document/d/18afKFY-A6-d6QdPgMN9z6D3tfxGSak8f0ZsiZiIFuX8/edit?usp=sharing)
+[Instructions](https://neilrbramley.com/experiments/apl/instructions.html)
 
-Check out *modeling/interactive_play/[1-main.R](modeling/interactive_play/1-main.R)*
+[Box2D settings](https://neilrbramley.com/experiments/apl/exp+settings.pdf)
+
+[Experiment 1 demo](https://neilrbramley.com/experiments/apl/e1/demo.html)
+
+[Experiment 1 replays](https://neilrbramley.com/experiments/apl/e1/replays.html)
+
+[Experiment 2 replays](https://neilrbramley.com/experiments/apl/e1/replays.html)
+
+[Psiturk implementation](coming soon)
+
+[Behavioural data](coming soon)
+
+[Full physics data](coming soon)
+
+### Strategy coding
+
+[Strategy videos](https://neilrbramley.com/experiments/apl/strategies.html)
+
+[Idealised strategies](coming soon)
+
+[Coding scheme](coming soon)
+
+[Coded datafiles](coming soon)
 
 
-### Prerequisites
+### Another section
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
 
 ```
-Give an example
+What is this?
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Neil Bramley** - *Most of it* - [website](https://neilrbramley.com)
+* **Tobias Gerstenberg** - *...* - [website](https://neilrbramley.com)
+* **Josh Tenenbaum** - *...* - [website](https://neilrbramley.com)
+* **Todd Gureckis** - *...* - [website](https://neilrbramley.com)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* Thanks to the Moore-Sloane Data Science Environment at NYU [website](https://cds.nyu.edu/mooresloan/)
