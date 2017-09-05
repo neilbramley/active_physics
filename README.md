@@ -14,9 +14,9 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 
 [Experiment 2 replays](https://neilrbramley.com/experiments/apl/e1/replays.html)
 
-[Psiturk implementation](coming soon)
+[Psiturk implementation](https://github.com/neilbramley/active_physics/tree/master/psiturk_experiments)
 
-[Behavioural data](coming soon)
+[Behavioral data](https://github.com/neilbramley/active_physics/tree/master/data)
 
 [Full physics data](https://www.openicpsr.org/openicpsr/project/100799/version/V1/view/)
 
@@ -26,9 +26,8 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 
 [Idealised strategies](coming soon)
 
-[Coding scheme](coming soon)
+[Coding scheme and datafiles](https://github.com/neilbramley/active_physics/tree/master/action_coding)
 
-[Coded datafiles](coming soon)
 
 
 ## Authors
