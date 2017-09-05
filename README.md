@@ -33,10 +33,10 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 
 ## Authors
 
-* **Neil Bramley** - *Most of it* - [website](https://neilrbramley.com)
-* **Tobias Gerstenberg** - *...* - [website](https://neilrbramley.com)
-* **Josh Tenenbaum** - *...* - [website](https://neilrbramley.com)
-* **Todd Gureckis** - *...* - [website](https://neilrbramley.com)
+* **Neil Bramley** -[website](https://neilrbramley.com)
+* **Tobias Gerstenberg** - [website](http://web.mit.edu/tger/www/)
+* **Josh Tenenbaum** - [website](http://web.mit.edu/cocosci/josh.html)
+* **Todd Gureckis** - [website](http://psych.nyu.edu/gureckis/)
 
 
 
