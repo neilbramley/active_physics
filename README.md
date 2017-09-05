@@ -31,13 +31,6 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 [Coded datafiles](coming soon)
 
 
-### Another section
-
-
-```
-What is this?
-```
-
 ## Authors
 
 * **Neil Bramley** - *Most of it* - [website](https://neilrbramley.com)
