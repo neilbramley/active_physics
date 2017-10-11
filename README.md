@@ -24,8 +24,6 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 
 [Strategy videos](https://neilrbramley.com/experiments/apl/strategies.html)
 
-[Idealised strategies](coming soon)
-
 [Coding scheme and datafiles](https://github.com/neilbramley/active_physics/tree/master/action_coding)
 
 
