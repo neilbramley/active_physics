@@ -12,7 +12,7 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 
 [Experiment 1 replays](https://neilrbramley.com/experiments/apl/e1/replays.html)
 
-[Experiment 2 replays](https://neilrbramley.com/experiments/apl/e1/replays.html)
+[Experiment 2 replays](https://neilrbramley.com/experiments/apl/e2/replays.html)
 
 [Psiturk implementation](https://github.com/neilbramley/active_physics/tree/master/psiturk_experiments)
 
