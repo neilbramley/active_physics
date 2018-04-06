@@ -6,7 +6,7 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 
 [Instructions](https://neilrbramley.com/experiments/apl/instructions.html)
 
-[Box2D settings](https://neilrbramley.com/experiments/apl/exp+settings.pdf)
+[Box2D settings](https://neilrbramley.com/experiments/apl/exp_settings.pdf)
 
 [Experiment 1 demo](https://neilrbramley.com/experiments/apl/e1/demo.html)
 
