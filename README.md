@@ -11,6 +11,7 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 [Experiment 1 demo](https://neilrbramley.com/experiments/apl/e1/demo.html)
 
 [Experiment 1 replays](https://neilrbramley.com/experiments/apl/e1/replays.html)
+[Replay from Figure 7 in Bramley, Gerstenberg, Tenenbaum & Gureckis (2018)](https://neilrbramley.com/experiments/apl/e1/replays?p=1)
 
 [Experiment 2 replays](https://neilrbramley.com/experiments/apl/e2/replays.html)
 
@@ -31,7 +32,7 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 ## Authors
 
 * **Neil Bramley** -[website](https://neilrbramley.com)
-* **Tobias Gerstenberg** - [website](http://web.mit.edu/tger/www/)
+* **Tobias Gerstenberg** - [website](http://cicl.stanford.edu/member/tobias_gerstenberg/)
 * **Josh Tenenbaum** - [website](http://web.mit.edu/cocosci/josh.html)
 * **Todd Gureckis** - [website](http://psych.nyu.edu/gureckis/)
 
