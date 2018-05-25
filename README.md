@@ -11,7 +11,8 @@ Online materials for active physics learning project conducted at UCL, NYU and M
 [Experiment 1 demo](https://neilrbramley.com/experiments/apl/e1/demo.html)
 
 [Experiment 1 replays](https://neilrbramley.com/experiments/apl/e1/replays.html)
-[Replay from Figure 7 in Bramley, Gerstenberg, Tenenbaum & Gureckis (2018)](https://neilrbramley.com/experiments/apl/e1/replays?p=1)
+
+[Specific replay Fig 7 in Bramley et al (2018)](https://neilrbramley.com/experiments/apl/e1/replays?p=1)
 
 [Experiment 2 replays](https://neilrbramley.com/experiments/apl/e2/replays.html)
 
